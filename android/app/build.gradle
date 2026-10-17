@@ -111,7 +111,27 @@ tasks.register("prepareAssets") {
 		copy {
 			from "${localeFolder}" into "${assetsFolder}/locale"
 		}
-		file("${assetsFolder}/minetest.conf").text = "menu_last_game = voxelibre\n"
+		file("${assetsFolder}/minetest.conf").text = """
+menu_last_game = voxelibre
+enable_touch = true
+touchscreen_threshold = 20
+touch_punch_gesture = true
+doubletap_jump = true
+always_fly_fast = false
+hud_scaling = 1.15
+inventory_image_hud = true
+enable_shaders = true
+enable_shadows = true
+enable_particles = true
+enable_3d_clouds = true
+view_range = 80
+mesh_generation_threads = 2
+wanted_fps = 60
+enable_sound = true
+enable_music = true
+sound_volume = 0.8
+music_volume = 0.55
+""".stripIndent()
 
 		file("${assetsFolder}/.nomedia").text = ""
 	}
