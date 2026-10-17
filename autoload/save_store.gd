@@ -5,6 +5,7 @@ const TEMP_PATH := "user://game_generic_save.tmp"
 const SAVE_VERSION := 2
 const TUTORIAL_VERSION := 1
 const MAX_LEADERBOARD_ROWS := 10
+const MAX_STAGE_COUNT := 2
 
 var _data: Dictionary = {}
 
@@ -106,7 +107,7 @@ func record_result(player_name: String, result: Dictionary) -> bool:
 	rows.append({
 		"name": clean_name,
 		"score": clampi(int(result.get("score", 0)), 0, 999999999),
-		"stage": clampi(int(result.get("stage", 1)), 1, StageCatalog.count()),
+		"stage": clampi(int(result.get("stage", 1)), 1, MAX_STAGE_COUNT),
 		"time": clampf(float(result.get("duration", 0.0)), 0.0, 99999.0),
 		"outcome": str(result.get("outcome", "defeat")),
 		"configuration_marker": str(result.get("configuration_marker", "cfg-unknown")).left(32),
@@ -159,7 +160,7 @@ func _sanitize_score_row(row: Dictionary) -> Dictionary:
 	return {
 		"name": _sanitize_name(str(row.get("name", "PLAYER"))),
 		"score": clampi(int(row.get("score", 0)), 0, 999999999),
-		"stage": clampi(int(row.get("stage", 1)), 1, StageCatalog.count()),
+		"stage": clampi(int(row.get("stage", 1)), 1, MAX_STAGE_COUNT),
 		"time": clampf(float(row.get("time", 0.0)), 0.0, 99999.0),
 		"outcome": outcome,
 		"configuration_marker": str(row.get("configuration_marker", "cfg-legacy")).left(32),

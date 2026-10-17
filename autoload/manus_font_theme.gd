@@ -5,9 +5,19 @@ var _regular: Font
 var _theme: Theme
 
 func _enter_tree() -> void:
-	_regular = load("res://assets/template/fonts/ui_regular.tres") as Font
-	assert(_regular != null, "Bundled UI font failed to import")
-	_theme = GameFonts.create_theme(_regular, load("res://assets/template/fonts/ui_medium.tres") as Font, load("res://assets/template/fonts/ui_bold.tres") as Font)
+	var catalog_font_path := "res://assets/template/fonts/ui_regular.tres"
+	var catalog_body_path := "res://assets/template/fonts/Figtree-VF.subset.woff2"
+	if FileAccess.file_exists(catalog_font_path) and FileAccess.file_exists(catalog_body_path):
+		_regular = load(catalog_font_path) as Font
+	if _regular == null:
+		# Catalog fonts are optional presentation assets. Keep Android startup
+		# alive when an imported catalog font is unavailable.
+		_regular = load("res://assets/fonts/DejaVuSans.ttf") as Font
+	if _regular == null:
+		var system_font := SystemFont.new()
+		system_font.font_names = PackedStringArray(["Noto Sans Arabic", "Noto Sans", "DejaVu Sans"])
+		_regular = system_font
+	_theme = GameFonts.create_theme(_regular, _regular, _regular)
 	get_tree().node_added.connect(_bind_node)
 	_bind_tree(get_tree().root)
 
