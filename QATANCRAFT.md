@@ -8,7 +8,7 @@ QatanCraft هي نسخة هاتفية مفتوحة المصدر من لعبة vo
 - معرّف الحزمة مستقل: `com.abdullahqatan.qatancraft`.
 - التطبيق يفتح في الوضع الأفقي لتناسب واجهة اللعب والاستكشاف.
 - تم تحديث مشروع Gradle إلى Android Gradle Plugin 8.5.2 وGradle 8.7، مع compile/target SDK 35.
-- أضيف سير عمل GitHub Actions لبناء APK تجريبي والتحقق من وجوده؛ ويرفعه كـArtifact عندما تكون مساحة التخزين في GitHub Actions متاحة.
+- أضيف سير عمل GitHub Actions لبناء APK تجريبي والتحقق من وجوده، ثم رفعه مباشرة داخل GitHub Release مسودة باسم `qatan-build-<run-id>`.
 
 ## البناء محليًا
 
