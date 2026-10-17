@@ -4,7 +4,7 @@
     {
       "kind": "scene",
       "path": "res://test/test_suite.tscn",
-      "expect": "[game-generic-tests] PASS:",
+      "expect": "[qatancraft-tests] PASS:",
       "profile": "source"
     },
     {
