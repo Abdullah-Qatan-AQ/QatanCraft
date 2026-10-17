@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="label">QatanCraft</string>
+	<string name="survival_tagline">Build. Explore. Survive.</string>
 	<string name="loading">Loading&#8230;</string>
 	<string name="notification_channel_name">General notification</string>
 	<string name="notification_channel_description">Notifications from QatanCraft</string>
