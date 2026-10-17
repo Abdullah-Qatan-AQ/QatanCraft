@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     namespace 'com.classicube'
     compileSdk 35
+    ndkVersion '26.3.11579264'
 
     defaultConfig {
         applicationId 'com.abdullahqatan.qatancraft'
