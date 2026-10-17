@@ -230,13 +230,15 @@ func _build_game_ui() -> void:
 	_save_label = _label("حفظ تلقائي", 13, Color("#83a5b4")); top_box.add_child(_save_label)
 	_toast = _label("", 22, Color("#ffffff")); _toast.position = Vector2(175, 120); _toast.size = Vector2(420, 60); _toast.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; _game_ui.add_child(_toast)
 	_touch_layer = Control.new(); _touch_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); _touch_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE; _game_ui.add_child(_touch_layer)
-	_make_touch_button("▲", Vector2(92, 610), Vector2(72, 62), Vector2(0, -1))
-	_make_touch_button("◀", Vector2(16, 678), Vector2(72, 62), Vector2(-1, 0))
-	_make_touch_button("▼", Vector2(92, 678), Vector2(72, 62), Vector2(0, 1))
-	_make_touch_button("▶", Vector2(168, 678), Vector2(72, 62), Vector2(1, 0))
-	var action := Button.new(); action.text = "كسر"; action.position = Vector2(525, 620); action.size = Vector2(115, 62); action.add_theme_font_size_override("font_size", 22); action.pressed.connect(_break_front); _style_button(action, Color("#e28a66")); _game_ui.add_child(action)
-	var place := Button.new(); place.text = "بناء"; place.position = Vector2(525, 692); place.size = Vector2(115, 62); place.add_theme_font_size_override("font_size", 22); place.pressed.connect(_place_front); _style_button(place, Color("#75d8c0")); _game_ui.add_child(place)
-	var cycle := Button.new(); cycle.text = "المادة: عشب"; cycle.position = Vector2(250, 692); cycle.size = Vector2(250, 62); cycle.add_theme_font_size_override("font_size", 18); cycle.pressed.connect(_cycle_block); _style_button(cycle, Color("#536b7d")); _game_ui.add_child(cycle)
+	var viewport_size := get_viewport_rect().size
+	var bottom_y := viewport_size.y - 132.0
+	_make_touch_button("▲", Vector2(92, bottom_y - 68.0), Vector2(72, 62), Vector2(0, -1))
+	_make_touch_button("◀", Vector2(16, bottom_y), Vector2(72, 62), Vector2(-1, 0))
+	_make_touch_button("▼", Vector2(92, bottom_y), Vector2(72, 62), Vector2(0, 1))
+	_make_touch_button("▶", Vector2(168, bottom_y), Vector2(72, 62), Vector2(1, 0))
+	var action := Button.new(); action.text = "كسر"; action.position = Vector2(viewport_size.x - 195.0, bottom_y - 68.0); action.size = Vector2(115, 62); action.add_theme_font_size_override("font_size", 22); action.pressed.connect(_break_front); _style_button(action, Color("#e28a66")); _game_ui.add_child(action)
+	var place := Button.new(); place.text = "بناء"; place.position = Vector2(viewport_size.x - 195.0, bottom_y); place.size = Vector2(115, 62); place.add_theme_font_size_override("font_size", 22); place.pressed.connect(_place_front); _style_button(place, Color("#75d8c0")); _game_ui.add_child(place)
+	var cycle := Button.new(); cycle.text = "المادة: عشب"; cycle.position = Vector2(viewport_size.x - 470.0, bottom_y); cycle.size = Vector2(250, 62); cycle.add_theme_font_size_override("font_size", 18); cycle.pressed.connect(_cycle_block); _style_button(cycle, Color("#536b7d")); _game_ui.add_child(cycle)
 
 func _make_touch_button(text: String, pos: Vector2, size: Vector2, dir: Vector2) -> void:
 	var b := Button.new(); b.text = text; b.position = pos; b.size = size; b.add_theme_font_size_override("font_size", 28); _style_button(b, Color("#294b60")); b.button_down.connect(func(): _moving = dir); b.button_up.connect(func(): _moving = Vector2.ZERO); _game_ui.add_child(b)
