@@ -1,33 +1,45 @@
-# QatanCraft
+# QatanCraft Survival
 
-QatanCraft هي نسخة هاتفية مفتوحة المصدر من لعبة voxel خفيفة، مبنية على محرك **ClassiCube** مع هوية Android مستقلة باسم QatanCraft. التجربة تركز على الاستكشاف والبناء داخل عوالم مكعبة، مع دعم اللمس وأداء مناسب للأجهزة المحمولة ووضع أفقي ثابت.
+QatanCraft Survival هي لعبة بقاء وبناء مكعبة للهواتف، مبنية على محرك **Luanti** المفتوح المصدر وتستخدم محتوى **VoxeLibre** المفتوح المصدر. الهدف هو تقديم تجربة بقاء قريبة من ألعاب voxel المعروفة: جمع الموارد، التعدين، الصناعة، الزراعة، الاستكشاف، الوحوش، الجوع والصحة، وبناء العوالم.
 
-## ما الذي تغيّر في هذه النسخة؟
+هذه النسخة لا تستخدم كود Minecraft أو علاماته أو أصوله المملوكة. التشابه في الميكانيكيات العامة يأتي من كون Luanti وVoxeLibre مشاريع مفتوحة المصدر مستوحاة من ألعاب voxel.
 
-- اسم التطبيق الظاهر على Android هو `QatanCraft`.
-- معرّف الحزمة مستقل: `com.abdullahqatan.qatancraft`.
-- التطبيق يفتح في الوضع الأفقي لتناسب واجهة اللعب والاستكشاف.
-- تم تحديث مشروع Gradle إلى Android Gradle Plugin 8.5.2 وGradle 8.7، مع compile/target SDK 35.
-- أضيف سير عمل GitHub Actions لبناء APK تجريبي والتحقق من وجوده، ثم رفعه مباشرة داخل GitHub Release مسودة باسم `qatan-build-<run-id>`.
-
-## البناء محليًا
+## البناء
 
 ```bash
-cd misc/android
+cd android
 chmod +x gradlew
 ./gradlew assembleDebug
 ```
 
-ينتج APK في:
+يُنشئ البناء APKs منفصلة للمعماريات المدعومة داخل:
 
 ```text
-misc/android/app/build/outputs/apk/debug/app-debug.apk
+android/app/build/outputs/apk/debug/
 ```
 
-يتطلب البناء Java 17 وAndroid SDK مع `platforms;android-35` و`cmake;3.22.1` وNDK متوافقًا.
+ينفّذ GitHub Actions البناء تلقائيًا، ثم يرفع APKs إلى **GitHub Release مسودة** باسم `qatan-survival-<run-id>`.
 
-## المصدر والترخيص
+## مكونات التجربة
 
-هذه النسخة مبنية على ClassiCube، وهو مشروع مستقل غير تابع لـ Mojang أو Microsoft. يحتفظ المستودع بملف `license.txt` الأصلي وجميع إشعارات المكونات الخارجية. كود ClassiCube الأساسي مرخّص برخصة BSD-3-Clause، وهي رخصة permissive تسمح بالاستخدام والتعديل والتوزيع وفق شروط حفظ إشعارات حقوق النشر وإخلاء المسؤولية.
+- محرك Luanti مع دعم Android واللمس.
+- VoxeLibre كلعبة بقاء افتراضية.
+- اختيار VoxeLibre افتراضيًا عند أول تشغيل.
+- وضع أفقي مناسب للهاتف.
+- بيانات التطبيق داخل مجلد QatanCraft الخاص بالتطبيق.
+- هوية Android مستقلة باسم `QatanCraft` ومعرّف `com.abdullahqatan.qatancraft`.
 
-اسم QatanCraft وتخصيصات Android في هذا المستودع من إعداد عبدالله قحطان. لا يوحي المشروع بوجود علاقة أو اعتماد رسمي مع Mojang أو Microsoft.
+## التراخيص
+
+- محرك Luanti: GNU LGPL v2.1 أو أحدث، حسب ملفات المصدر.
+- محتوى VoxeLibre البرمجي: GNU GPLv3 أو أحدث.
+- وسائط VoxeLibre موثقة داخل `games/voxelibre/LEGAL.md`، وتشمل تراخيص CC BY-SA وCC BY وCC0 حسب الملف.
+- يجب إبقاء ملفات التراخيص والإشعارات عند إعادة التوزيع.
+
+## النسخ السابقة
+
+تم الاحتفاظ بنسخة ClassiCube السابقة في فرع GitHub:
+
+```text
+classicube-before-luanti-rebuild
+```
