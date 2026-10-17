@@ -3,7 +3,7 @@
   "engineVersion": "4.7.2.stable.official.ed1daf0bf",
   "inputs": {
     "objectFormat": "sha1",
-    "tree": "d01f13c1e755c3b786f631e2f6c05f62ff82a58a",
+    "tree": "eebec48fd4f35c1c7c493a08ebe2619599e1e2f1",
     "entries": [
       {
         "path": ".gitignore",
@@ -876,7 +876,7 @@
         "path": "tools/verify_exported_pack.gd",
         "type": "file",
         "mode": "100644",
-        "object": "58e71aeeed9e6c3c69e612cac4f3ab1efbaa195b"
+        "object": "33a31820658783ade3d2e8d70f1138dc7dfff304"
       },
       {
         "path": "tools/verify_exported_pack.gd.uid",
@@ -899,7 +899,7 @@
     ]
   },
   "build": {
-    "snapshotId": "sha256:fca35ec9b3060c43ba6ac21c0b7801bf05872b738627ce4b586480e2bcce9e5b",
+    "snapshotId": "sha256:babcccdb5e63bfbbdb40b595b897336a4d6651c9206eabee66629e9b6000315f",
     "toolchain": {
       "engineVersion": "4.7.2.stable.official.ed1daf0bf",
       "engineDigest": "sha256:8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e",
@@ -912,7 +912,7 @@
     "profile": "release",
     "export": {
       "profile": "release",
-      "snapshotId": "sha256:fca35ec9b3060c43ba6ac21c0b7801bf05872b738627ce4b586480e2bcce9e5b",
+      "snapshotId": "sha256:babcccdb5e63bfbbdb40b595b897336a4d6651c9206eabee66629e9b6000315f",
       "files": {
         "THIRD_PARTY_NOTICES.txt": "sha256:c729a77bf07eb9745b2d89c3ce4ead3357438366f41743d2755ae35f98509cf9",
         "index.apple-touch-icon.png": "sha256:223ba4214aa892c363acf1d673904d77262a586cc66ff0adf75128f85e931e88",
@@ -921,12 +921,12 @@
         "index.html": "sha256:24df5ec1ac1e8dbcc7a12803ba127d4ec995fbe3d2a0a6311a18f6b540465231",
         "index.icon.png": "sha256:24e35756331a1621216bb32813dc7899b8bd94bc28e2cdca264d00c855d34768",
         "index.js": "sha256:cb28c2d8ffd8981888823f1b6d98cdec4e3e11adf209ad556c22878e6d51c63a",
-        "index.pck": "sha256:c753fc50e80befe84a679203cd403ade77ac1d54e2480e070cd3afd6afc0b625",
+        "index.pck": "sha256:6e1d8dd88a09dd08cee83da015b622d1dcefd81834344a52694db53a3d1c3052",
         "index.png": "sha256:3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e",
         "index.wasm": "sha256:fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0",
         "open-source-licenses.html": "sha256:9215f5fdd50039a9b6f3d8f0271cbc21bbdf64b917fb118dd29c8a16b9974e00"
       },
-      "digest": "sha256:38220d4eb9b7345bd1f79b9c4e2e837793704045a71c7e40b3be56e6ed7dd5dc"
+      "digest": "sha256:9b9b8dfff1bbc0bee5038a96b19d2badbb0734b7c9f5d70264bf0e2f9a697bad"
     }
   },
   "artifacts": {
@@ -935,8 +935,8 @@
       "sha256": "sha256:fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
     },
     "pck": {
-      "path": "/manus-storage/game/sha256/c753fc50e80befe84a679203cd403ade77ac1d54e2480e070cd3afd6afc0b625.pck",
-      "sha256": "sha256:c753fc50e80befe84a679203cd403ade77ac1d54e2480e070cd3afd6afc0b625"
+      "path": "/manus-storage/game/sha256/6e1d8dd88a09dd08cee83da015b622d1dcefd81834344a52694db53a3d1c3052.pck",
+      "sha256": "sha256:6e1d8dd88a09dd08cee83da015b622d1dcefd81834344a52694db53a3d1c3052"
     }
   },
   "files": {
@@ -945,7 +945,7 @@
     "index.apple-touch-icon.png": "sha256:223ba4214aa892c363acf1d673904d77262a586cc66ff0adf75128f85e931e88",
     "index.audio.position.worklet.js": "sha256:be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
     "index.audio.worklet.js": "sha256:5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
-    "index.html": "sha256:d54e35c55326f0146ed5b4688c32fdbdaef03801386710ed982493a3dc27cd10",
+    "index.html": "sha256:65f4d6692ce5f7089f47d6c9f68fbb952770c866c0c8a98e52285c2084a8386a",
     "index.icon.png": "sha256:24e35756331a1621216bb32813dc7899b8bd94bc28e2cdca264d00c855d34768",
     "index.js": "sha256:cb28c2d8ffd8981888823f1b6d98cdec4e3e11adf209ad556c22878e6d51c63a",
     "index.png": "sha256:3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e",
