@@ -2,14 +2,14 @@
 Basic help for MCL2. Fork of doc_basics
 ]]
 
-local S = minetest.get_translator(minetest.get_current_modname())
+local S = qatancraft.get_translator(qatancraft.get_current_modname())
 
 doc.add_category("basics",
 {
 	name = S("Basics"),
 	description = S("Everything you need to know to get started with playing"),
 	sorting = "custom",
-	sorting_data = {"quick_start", "controls", "point", "items", "inventory", "hotbar", "tools", "weapons", "nodes", "mine", "build", "craft", "cook", "hunger", "mobs", "animals", "minimap", "cam", "sneak", "players", "liquids", "light", "groups", "glossary", "minetest"},
+	sorting_data = {"quick_start", "controls", "point", "items", "inventory", "hotbar", "tools", "weapons", "nodes", "mine", "build", "craft", "cook", "hunger", "mobs", "animals", "minimap", "cam", "sneak", "players", "liquids", "light", "groups", "glossary", "qatancraft"},
 	build_formspec = doc.entry_builders.text_and_gallery,
 })
 
@@ -54,19 +54,19 @@ S("• Read entries in this help to learn the rest").."\n"..
 S("• Continue playing as you wish. There's no goal. Have fun!")
 }})
 
-doc.add_entry("basics", "minetest", {
-	name = S("Minetest"),
+doc.add_entry("basics", "qatan_basics", {
+	name = S("QatanCraft basics"),
 	data = {
 		text =
-S("Minetest is a free software game engine for games based on voxel gameplay, inspired by InfiniMiner, Minecraft, and the like. Minetest was originally created by Perttu Ahola (alias “celeron55”).").."\n\n"..
+S("QatanCraft is a complete voxel survival adventure built for mobile play. Explore a living world, gather resources, craft tools, build a home, and survive the night.").."\n\n"..
 
-S("The player is thrown into a huge world made out of cubes or blocks. These cubes usually make the landscape they blocks can be removed and placed almost entirely freely. Using the collected items, new tools and other items can be crafted. Games in Minetest can, however, be much more complex than this.").."\n\n"..
+S("The world is made of blocks that can be mined and placed. Collected materials become tools, shelters, farms, weapons, and everything you need to shape your own story.").."\n\n"..
 
-S("A core feature of Minetest is the built-in modding capability. Mods modify existing gameplay. They can be as simple as adding a few decorative blocks or be very complex by, e.g., introducing completely new gameplay concepts, generating a completely different kind of world, and many other things.").."\n\n"..
+S("QatanCraft combines building, farming, exploration, combat, and discovery into one complete survival progression.").."\n\n"..
 
-S("Minetest can be played alone or online together with multiple players. Online play will work out of the box with any mods, with no need for additional software as they are entirely provided by the server.").."\n\n"..
+S("QatanCraft supports offline single-player survival and online multiplayer. Servers provide their own worlds and content so you can play together without installing extra packages.").."\n\n"..
 
-S("Minetest is usually bundled with a simple default game, named “Minetest Game” (shown in images 1 and 2). You probably already have it. Other games for Minetest can be downloaded from the official Minetest forums <https://forum.minetest.net/viewforum.php?f=48>."),
+S("Use the left touch area to move, drag the right side to look around, tap to interact, and hold to mine. Open your inventory to craft equipment and manage your resources."),
 
 		images = {{image="doc_basics_gameplay_mtg_1.png"}, {image="doc_basics_gameplay_mtg_2.png"}, {image="doc_basics_gameplay_carbone_ng.png"}, {image="doc_basics_gameplay_lott.png"}, {image="doc_basics_gameplay_pixture.png"}, {image="doc_basics_gameplay_outback.png"}, {image="doc_basics_gameplay_moontest.png"},
 {image="doc_basics_gameplay_hades.png"}, {image="doc_basics_gameplay_xtraores_xtension.png"},}
@@ -477,19 +477,19 @@ S("• Sneak+Left click: Automatically transfer item stack"),
 doc.add_entry("advanced", "online", {
 	name = S("Online help"),
 	data = { text=
-S("You may want to check out these online resources related to Minetest:").."\n\n"..
+S("QatanCraft online resources:").."\n\n"..
 
-S("Official homepage of Minetest: <https://minetest.net/>").."\n"..
-S("The main place to find the most recent version of Minetest.").."\n\n"..
+S("Project page: <https://github.com/Abdullah-Qatan-AQ/QatanCraft>").."\n"..
+S("Find updates, support, and community news on the project page.").."\n\n"..
 
-S("Community wiki: <https://wiki.minetest.net/>").."\n"..
-S("A community-based documentation website for Minetest. Anyone with an account can edit it! It also features a documentation of Minetest Game.").."\n\n"..
+S("In-game guide: available from the Help menu.").."\n"..
+S("Use the in-game Join Game tab to discover online worlds, or create a local world for offline survival.").."\n\n"..
 
-S("Web forums: <https://forums.minetest.net/>").."\n"..
-S("A web-based discussion platform where you can discuss everything related to Minetest. This is also a place where player-made mods and games are published and discussed. The discussions are mainly in English, but there is also space for discussion in other languages.").."\n\n"..
+S("Community discussions: available through the QatanCraft project page.").."\n"..
+S("Share builds, report issues, and exchange survival tips with other players.").."\n\n"..
 
-S("Chat: <irc://irc.freenode.net#minetest>").."\n"..
-S("A generic Internet Relay Chat channel for everything related to Minetest where people can meet to discuss in real-time. If you do not understand IRC, see the Community Wiki for help.")
+S("Community chat: follow the project page for current channels.").."\n"..
+S("Play together, ask questions, and share your discoveries with the community.")
 }})
 
 doc.add_entry("basics", "groups", {
@@ -565,9 +565,9 @@ S("• Griefing: Destroying the buildings of other players against their will").
 S("• Protection: Mechanism to own areas of the world, which only allows the owners to modify blocks inside").."\n\n"..
 
 S("Technical terms:").."\n"..
-S("• Minetest: This game engine").."\n"..
-S("• Minetest Game: A game for Minetest by the Minetest developers").."\n"..
-S("• Game: A complete playing experience to be used in Minetest; such as a game or sandbox or similar").."\n"..
+S("• QatanCraft: This game and survival experience").."\n"..
+S("• Survival world: The world where you gather, craft, build, and explore").."\n"..
+S("• Game: A complete playing experience with its own rules, world, items, and progression").."\n"..
 S("• Mod: A single subsystem which adds or modifies functionality; is the basic building block of games and can be used to further enhance or modify them").."\n"..
 S("• Privilege: Allows a player to do something").."\n"..
 S("• Node: Other word for “block”")
@@ -577,7 +577,7 @@ doc.add_entry("advanced", "settings", {
 	name = S("Settings"),
 	data = {
 		text =
-S("There is a large variety of settings to configure Minetest. Pretty much every aspect can be changed that way.").."\n\n"..
+S("There is a large variety of settings to configure QatanCraft. Pretty much every aspect can be changed that way.").."\n\n"..
 
 S("These are a few of the most important gameplay settings:").."\n\n"..
 
@@ -639,7 +639,7 @@ S("• [Ctrl]+[K]: Delete all text after the cursor").."\n"..
 S("• [Page up]: Scroll up").."\n"..
 S("• [Page down]: Scroll down").."\n"..
 
-S("There is also an input history. Minetest saves your previous console inputs which you can quickly access later:").."\n\n"..
+S("There is also an input history. QatanCraft saves your previous console inputs which you can quickly access later:").."\n\n"..
 
 S("• [Up]: Go to previous entry in history").."\n"..
 S("• [Down]: Go to next entry in history")
@@ -652,7 +652,7 @@ S("Server commands (also called “chat commands”) are little helpers for adva
 
 S("Server commands can be entered by players using the chat to perform a special server action. There are a few commands which can be issued by everyone, but some commands only work if you have certain privileges granted on the server. There is a small set of basic commands which are always available, other commands can be added by mods.").."\n\n"..
 
-S("To issue a command, simply type it like a chat message or press Minetest's command key (default: [/]). All commands have to begin with “/”, for example “/mods”. The Minetest command key does the same as the chat key, except that the slash is already entered.").."\n"..
+S("To issue a command, simply type it like a chat message or press QatanCraft's command key (default: [/]). All commands have to begin with “/”, for example “/mods”. The QatanCraft command key does the same as the chat key, except that the slash is already entered.").."\n"..
 S("Commands may or may not give a response in the chat log, but errors will generally be shown in the chat. Try it for yourselves: Close this window and type in the “/mods” command. This will give you the list of available mods on this server.").."\n\n"..
 
 S("“/help all” is a very important command: You get a list of all available commands on the server, a short explanation and the allowed parameters. This command is also important because the available commands often differ per server.").."\n\n"..
@@ -753,4 +753,4 @@ S("• The side length of a full cube is 1").."\n\n"..
 S("You can view your current position in the debug screen (open with [F5]).")
 }})
 
-dofile(minetest.get_modpath(minetest.get_current_modname()).."/mcl_extension.lua")
+dofile(qatancraft.get_modpath(qatancraft.get_current_modname()).."/mcl_extension.lua")

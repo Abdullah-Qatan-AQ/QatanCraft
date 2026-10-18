@@ -14,6 +14,12 @@ android {
 	buildFeatures {
 		buildConfig true
 	}
+	buildTypes {
+		release {
+			minifyEnabled false
+			signingConfig signingConfigs.debug
+		}
+	}
 
 	// load properties
 	Properties props = new Properties()
@@ -111,6 +117,7 @@ tasks.register("prepareAssets") {
 		}
 		file("${assetsFolder}/minetest.conf").text = """
 menu_last_game = voxelibre
+project_name = QatanCraft
 enable_touch = true
 touchscreen_threshold = 20
 touch_punch_gesture = true
@@ -129,6 +136,8 @@ enable_sound = true
 enable_music = true
 sound_volume = 0.8
 music_volume = 0.55
+show_debug = false
+opengl_debug = false
 """.stripIndent()
 
 		file("${assetsFolder}/.nomedia").text = ""

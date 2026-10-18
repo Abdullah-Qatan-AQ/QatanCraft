@@ -86,7 +86,7 @@ return {
 			"style_type[label;valign=center;halign=center]" ..
 			"label[0.1,3.4;5.3,0.5;" ..
 			core.formspec_escape(version.project .. " " .. version.string) .. "]" ..
-			"button_url[1.5,4.1;2.5,0.8;homepage;luanti.org;https://www.luanti.org/]"
+			"button_url[1.5,4.1;2.5,0.8;homepage;QatanCraft;https://github.com/Abdullah-Qatan-AQ/QatanCraft]"
 
 		if PLATFORM == "Android" then
 			fs = fs .. "button[0.5,5.1;4.5,0.8;share_debug;" .. fgettext("Share debug log") .. "]"

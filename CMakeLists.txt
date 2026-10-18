@@ -18,8 +18,8 @@ set(VERSION_MINOR 18)
 set(VERSION_PATCH 0)
 set(VERSION_EXTRA "" CACHE STRING "Stuff to append to version string")
 
-# Change to false for releases
-set(DEVELOPMENT_BUILD TRUE)
+# QatanCraft mobile builds are shipped as production releases.
+set(DEVELOPMENT_BUILD FALSE)
 
 set(VERSION_STRING "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 if(VERSION_EXTRA)

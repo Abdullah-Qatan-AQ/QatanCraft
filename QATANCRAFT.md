@@ -9,24 +9,27 @@ QatanCraft Survival هي لعبة بقاء وبناء مكعبة للهواتف�
 ```bash
 cd android
 chmod +x gradlew
-./gradlew assembleDebug
+./gradlew assembleRelease
 ```
 
 يُنشئ البناء APK واحدًا عالميًا موقّعًا للتجربة، يحتوي معماريات ARM وx86، داخل:
 
 ```text
-android/app/build/outputs/apk/debug/
+android/app/build/outputs/apk/release/
 ```
 
 ينفّذ GitHub Actions البناء تلقائيًا، ويتحقق من اسم الحزمة ووجود المكتبة الأصلية ومحتوى VoxeLibre، ثم يرفع ملف `QatanCraft-Survival-universal.apk` إلى **GitHub Release مسودة** باسم `qatan-survival-<run-id>`.
 
 ## مكونات التجربة
 
+- نسخة إنتاجية موقعة من QatanCraft بدون تحذير Debug أو وسم `-dev-debug`.
+- هوية قائمة رئيسية مستقلة: شعار QatanCraft، بانر بقاء أصلي، ورابط About للمستودع.
 - محرك Luanti مع دعم Android واللمس.
 - VoxeLibre كلعبة بقاء افتراضية.
 - اختيار VoxeLibre افتراضيًا عند أول تشغيل.
 - وضع أفقي مناسب للهاتف.
 - شاشة ترحيب داخل اللعبة تشرح أول خطوات البقاء والتحكم باللمس.
+- دليل مساعدة داخل اللعبة يشرح البقاء والتحكم واللعب الفردي والجماعي باسم QatanCraft.
 - إعدادات افتراضية متوازنة للهاتف: 60 FPS، ظلال، سحب ثلاثية الأبعاد، جسيمات، صوت وموسيقى.
 - واجهة HUD أكبر قليلًا لتناسب الشاشات الصغيرة، مع قفز بالنقر المزدوج وإيماءة لمس للتفاعل.
 - دعم اللعب الفردي دون اتصال، والاتصال بعوالم LAN أو خوادم Luanti عند توفر الشبكة.
