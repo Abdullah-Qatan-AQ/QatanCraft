@@ -1,4 +1,4 @@
-name: QatanCraft Survival Android APK
+name: QatanCraft Survival Installable APK
 
 on:
   push:
@@ -22,10 +22,10 @@ permissions:
   contents: write
 
 jobs:
-  build-debug-apk:
-    name: Build QatanCraft Survival APK
+  build-installable-apk:
+    name: Build QatanCraft Survival universal APK
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
 
     steps:
       - name: Check out QatanCraft
@@ -51,32 +51,32 @@ jobs:
         run: |
           sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0" "cmake;3.22.1" "ndk;30.0.16248370"
 
-      - name: Build QatanCraft Survival APKs
+      - name: Build signed universal APK
         working-directory: android
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon --stacktrace
+          ./gradlew clean assembleDebug --no-daemon --stacktrace
 
-      - name: Verify APK output
+      - name: Verify installable package and native ABIs
+        env:
+          APK: android/app/build/outputs/apk/debug/app-debug.apk
         run: |
-          test -n "$(find android/app/build/outputs/apk/debug -maxdepth 1 -type f -name '*.apk' -print -quit)"
-          find android/app/build/outputs/apk/debug -maxdepth 1 -type f -name '*.apk' -printf '%f %s bytes\n'
+          test -f "$APK"
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" | grep -F "package: name='com.qatancraft.survival'"
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose "$APK"
+          unzip -l "$APK" | grep -E 'lib/(armeabi-v7a|arm64-v8a|x86|x86_64)/libqatancraft.so'
+          unzip -l "$APK" | grep -F 'assets/games/voxelibre/game.conf'
+          cp "$APK" QatanCraft-Survival-universal.apk
+          sha256sum QatanCraft-Survival-universal.apk
 
-      - name: Upload APKs to draft GitHub Release
+      - name: Upload one installable APK to draft GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: qatan-survival-${{ github.run_id }}
         run: |
-          mapfile -t APKS < <(find android/app/build/outputs/apk/debug -maxdepth 1 -type f -name '*.apk' -print)
-          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            for apk in "${APKS[@]}"; do
-              gh release upload "$RELEASE_TAG" "$apk" --repo "$GITHUB_REPOSITORY" --clobber
-            done
-          else
-            gh release create "$RELEASE_TAG" "${APKS[@]}" \
-              --repo "$GITHUB_REPOSITORY" \
-              --target "$GITHUB_SHA" \
-              --draft \
-              --title "QatanCraft Survival Android — draft build $GITHUB_RUN_NUMBER" \
-              --notes "مسودة QatanCraft Survival مبنية بمحرك Luanti ومحتوى VoxeLibre المفتوح من commit $GITHUB_SHA."
-          fi
+          gh release create "$RELEASE_TAG" QatanCraft-Survival-universal.apk \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --draft \
+            --title "QatanCraft Survival — installable universal APK $GITHUB_RUN_NUMBER" \
+            --notes "نسخة اختبار قابلة للتثبيت من QatanCraft Survival. تحتوي اللعبة ومحتوى VoxeLibre، وتستخدم حزمة Android جديدة: com.qatancraft.survival."

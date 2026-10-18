@@ -3,10 +3,10 @@
     <string name="label">QatanCraft</string>
     <string name="loading">Carregando…</string>
     <string name="notification_channel_name">Notificação geral</string>
-    <string name="notification_channel_description">Notificações do Luanti</string>
-    <string name="unzip_notification_title">Carregando Luanti</string>
+    <string name="notification_channel_description">QatanCraft notifications</string>
+    <string name="unzip_notification_title">Loading QatanCraft</string>
     <string name="unzip_notification_description">Menos de 1 minuto…</string>
-    <string name="game_notification_title">O Luanti está em execução</string>
+    <string name="game_notification_title">QatanCraft is running</string>
     <string name="ime_dialog_done">Concluído</string>
     <string name="no_web_browser">Nenhum navegador encontrado</string>
 </resources>

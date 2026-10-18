@@ -12,13 +12,13 @@ chmod +x gradlew
 ./gradlew assembleDebug
 ```
 
-يُنشئ البناء APKs منفصلة للمعماريات المدعومة داخل:
+يُنشئ البناء APK واحدًا عالميًا موقّعًا للتجربة، يحتوي معماريات ARM وx86، داخل:
 
 ```text
 android/app/build/outputs/apk/debug/
 ```
 
-ينفّذ GitHub Actions البناء تلقائيًا، ثم يرفع APKs إلى **GitHub Release مسودة** باسم `qatan-survival-<run-id>`.
+ينفّذ GitHub Actions البناء تلقائيًا، ويتحقق من اسم الحزمة ووجود المكتبة الأصلية ومحتوى VoxeLibre، ثم يرفع ملف `QatanCraft-Survival-universal.apk` إلى **GitHub Release مسودة** باسم `qatan-survival-<run-id>`.
 
 ## مكونات التجربة
 
@@ -31,7 +31,7 @@ android/app/build/outputs/apk/debug/
 - واجهة HUD أكبر قليلًا لتناسب الشاشات الصغيرة، مع قفز بالنقر المزدوج وإيماءة لمس للتفاعل.
 - دعم اللعب الفردي دون اتصال، والاتصال بعوالم LAN أو خوادم Luanti عند توفر الشبكة.
 - بيانات التطبيق داخل مجلد QatanCraft الخاص بالتطبيق.
-- هوية Android مستقلة باسم `QatanCraft` ومعرّف `com.abdullahqatan.qatancraft`.
+- هوية Android مستقلة باسم `QatanCraft` ومعرّف `com.qatancraft.survival`.
 
 ## التراخيص
 

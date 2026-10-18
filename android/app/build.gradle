@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
 	ndkVersion "$ndk_version"
 	defaultConfig {
-		applicationId 'com.abdullahqatan.qatancraft'
+		applicationId 'com.qatancraft.survival'
 		minSdkVersion 21
 		compileSdk = 34
 		targetSdkVersion 35
@@ -42,13 +42,11 @@ android {
 	// for multiple APKs
 	splits {
 		abi {
-			enable true
-			reset()
-			include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+			enable false
 		}
 	}
 
-	namespace 'net.minetest.minetest'
+	namespace 'com.qatancraft.survival'
 }
 
 // Register one task for each locale file
@@ -65,9 +63,9 @@ fileTree("${projRoot}/po").include("**/*.po").grep {
 
 	def task = tasks.register("compileTranslation[${lang}]", Exec) {
 		inputs.file(poFile)
-		outputs.file("${moPath}/luanti.mo")
+		outputs.file("${moPath}/qatancraft.mo")
 		doFirst { file(moPath).mkdirs() }
-		commandLine("msgfmt", "-o", "${moPath}/luanti.mo", poFile)
+		commandLine("msgfmt", "-o", "${moPath}/qatancraft.mo", poFile)
 	}
 	localeTasks << task
 }

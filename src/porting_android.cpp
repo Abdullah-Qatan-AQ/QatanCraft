@@ -1,4 +1,4 @@
-// Luanti
+// QatanCraft
 // SPDX-License-Identifier: LGPL-2.1-or-later
 // Copyright (C) 2014 celeron55, Perttu Ahola <celeron55@gmail.com>
 
@@ -30,7 +30,7 @@
 extern int main(int argc, char *argv[]);
 
 extern "C" JNIEXPORT void JNICALL
-Java_net_minetest_minetest_GameActivity_saveSettings(JNIEnv* env, jobject /* this */) {
+Java_com_qatancraft_survival_GameActivity_saveSettings(JNIEnv* env, jobject /* this */) {
 	if (!g_settings_path.empty())
 		g_settings->updateConfigFile(g_settings_path.c_str());
 }
@@ -75,7 +75,7 @@ void osSpecificInit()
 #ifdef GPROF
 	// in the start-up code
 	warningstream << "Initializing GPROF profiler" << std::endl;
-	monstartup("libluanti.so");
+	monstartup("libqatancraft.so");
 #endif
 }
 

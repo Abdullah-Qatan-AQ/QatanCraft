@@ -5,8 +5,8 @@
     <string name="loading">Nalaganje …</string>
     <string name="unzip_notification_description">Manj kot 1 minuta …</string>
     <string name="label">QatanCraft</string>
-    <string name="notification_channel_description">Obvestilo od Luantija</string>
+    <string name="notification_channel_description">QatanCraft notifications</string>
     <string name="ime_dialog_done">Končano</string>
-    <string name="unzip_notification_title">Nalaganje Luantija</string>
-    <string name="game_notification_title">Luanti teče</string>
+    <string name="unzip_notification_title">Loading QatanCraft</string>
+    <string name="game_notification_title">QatanCraft is running</string>
 </resources>

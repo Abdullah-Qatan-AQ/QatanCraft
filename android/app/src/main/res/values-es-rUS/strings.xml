@@ -6,7 +6,7 @@
     <string name="loading">Cargando…</string>
     <string name="notification_channel_name">Notificación General</string>
     <string name="label">QatanCraft</string>
-    <string name="notification_channel_description">Notificaciones de Luanti</string>
-    <string name="unzip_notification_title">Cargando Luanti</string>
-    <string name="game_notification_title">Luanti se está ejecutando</string>
+    <string name="notification_channel_description">QatanCraft notifications</string>
+    <string name="unzip_notification_title">Loading QatanCraft</string>
+    <string name="game_notification_title">QatanCraft is running</string>
 </resources>

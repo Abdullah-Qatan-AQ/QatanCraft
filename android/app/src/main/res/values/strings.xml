@@ -4,7 +4,7 @@
 	<string name="survival_tagline">Build. Explore. Survive.</string>
 	<string name="loading">Loading&#8230;</string>
 	<string name="notification_channel_name">General notification</string>
-	<string name="notification_channel_description">Notifications from QatanCraft</string>
+	<string name="notification_channel_description">QatanCraft notifications</string>
 	<string name="unzip_notification_title">Loading QatanCraft</string>
 	<string name="unzip_notification_description">Preparing your survival world&#8230;</string>
 	<string name="game_notification_title">QatanCraft is running</string>

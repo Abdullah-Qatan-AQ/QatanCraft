@@ -41,7 +41,7 @@ android {
 			}
 		}
 	}
-	namespace 'net.minetest'
+	namespace 'com.qatancraft.survival.nativecode'
 }
 
 def depsDir = layout.buildDirectory.dir("../deps").get().asFile

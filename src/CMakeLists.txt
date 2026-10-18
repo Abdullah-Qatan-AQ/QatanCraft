@@ -1,4 +1,4 @@
-project(luanti)
+project(qatancraft)
 
 INCLUDE(CheckTypeSize)
 INCLUDE(CheckIncludeFiles)

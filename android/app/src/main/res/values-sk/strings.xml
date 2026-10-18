@@ -3,10 +3,10 @@
     <string name="label">QatanCraft</string>
     <string name="loading">Načítavam…</string>
     <string name="notification_channel_name">Hlavné oznámenie</string>
-    <string name="notification_channel_description">Oznámenia Luanti</string>
-    <string name="unzip_notification_title">Načítanie Luanti</string>
+    <string name="notification_channel_description">QatanCraft notifications</string>
+    <string name="unzip_notification_title">Loading QatanCraft</string>
     <string name="unzip_notification_description">Už iba minútka…</string>
-    <string name="game_notification_title">Luanti už frčí</string>
+    <string name="game_notification_title">QatanCraft is running</string>
     <string name="ime_dialog_done">Hotovo</string>
     <string name="no_web_browser">Nenašiel som žiaden prehliadač</string>
 </resources>

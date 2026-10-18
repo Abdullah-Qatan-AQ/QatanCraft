@@ -1,4 +1,4 @@
-package net.minetest.minetest;
+package com.qatancraft.survival;
 
 import static android.provider.DocumentsContract.Document;
 import static android.provider.DocumentsContract.Root;
@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-public class LuantiDocumentsProvider extends DocumentsProvider {
+public class QatanCraftDocumentsProvider extends DocumentsProvider {
 	private String dataDirectory;
 
 	private static final String[] DEFAULT_ROOT_PROJECTION = new String[] {
@@ -37,7 +37,7 @@ public class LuantiDocumentsProvider extends DocumentsProvider {
 		try {
 			dataDirectory = Utils.getUserDataDirectory(getContext()).getCanonicalPath();
 		} catch (IOException e) {
-			Log.w("LuantiDocumentsProvider", e);
+			Log.w("QatanCraftDocumentsProvider", e);
 			return false;
 		}
 		return new File(dataDirectory).isDirectory();
@@ -100,7 +100,7 @@ public class LuantiDocumentsProvider extends DocumentsProvider {
 		try {
 			relative = makeRelative(file);
 		} catch (IOException e) {
-			Log.w("LuantiDocumentsProvider", "can't make relative: " + file.getAbsolutePath(), e);
+			Log.w("QatanCraftDocumentsProvider", "can't make relative: " + file.getAbsolutePath(), e);
 			return; // document providers are not allowed to throw an IOException, so just bail out
 		}
 		row.add(Document.COLUMN_DOCUMENT_ID, relative);

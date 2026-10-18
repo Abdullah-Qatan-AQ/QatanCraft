@@ -54,7 +54,7 @@
 		<!-- FIXME: we can probably drop this and use the documents provider to share files -->
 		<provider
 			android:name="androidx.core.content.FileProvider"
-			android:authorities="com.abdullahqatan.qatancraft.fileprovider"
+			android:authorities="com.qatancraft.survival.fileprovider"
 			android:grantUriPermissions="true"
 			android:exported="false">
 			<meta-data
@@ -63,8 +63,8 @@
 		</provider>
 
 		<provider
-            android:name=".LuantiDocumentsProvider"
-            android:authorities="net.minetest.minetest.documents"
+            android:name=".QatanCraftDocumentsProvider"
+            android:authorities="com.qatancraft.survival.documents"
             android:exported="true"
             android:grantUriPermissions="true"
             android:permission="android.permission.MANAGE_DOCUMENTS">
