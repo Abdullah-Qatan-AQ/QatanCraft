@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: minetest\n"
+"Project-Id-Version: QatanCraft\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-10 17:35+0200\n"
 "PO-Revision-Date: 2026-07-22 13:01+0000\n"
@@ -7650,3 +7650,107 @@ msgstr ""
 #, fuzzy
 #~ msgid "Keybindings"
 #~ msgstr "روابط المفاتيح."
+
+#: QatanCraft custom UI
+msgid "QatanCraft is a voxel survival world built for mobile play."
+msgstr "QatanCraft عالم بقاء مكعب مصمم للعب على الهاتف."
+
+#: QatanCraft custom UI
+msgid "Create a world, gather resources, craft tools, and explore."
+msgstr "أنشئ عالمًا، اجمع الموارد، اصنع الأدوات، واستكشف."
+
+#: QatanCraft custom UI
+msgid "QatanCraft basics"
+msgstr "أساسيات QatanCraft"
+
+#: QatanCraft custom UI
+msgid "QatanCraft is a complete voxel survival adventure built for mobile play. Explore a living world, gather resources, craft tools, build a home, and survive the night."
+msgstr "QatanCraft مغامرة بقاء مكعبة مصممة للهاتف. استكشف عالمًا حيًا، اجمع الموارد، اصنع الأدوات، ابنِ منزلك، واصمد أمام الليل."
+
+#: QatanCraft custom UI
+msgid "The world is made of blocks that can be mined and placed. Collected materials become tools, shelters, farms, weapons, and everything you need to shape your own story."
+msgstr "يتكوّن العالم من كتل يمكنك تعدينها ووضعها. تتحول موادك إلى أدوات ومساكن ومزارع وأسلحة وكل ما تحتاجه لصنع قصتك."
+
+#: QatanCraft custom UI
+msgid "QatanCraft combines building, farming, exploration, combat, and discovery into one complete survival progression."
+msgstr "يجمع QatanCraft بين البناء والزراعة والاستكشاف والقتال والاكتشاف في رحلة بقاء متكاملة."
+
+#: QatanCraft custom UI
+msgid "QatanCraft supports offline single-player survival and online multiplayer. Servers provide their own worlds and content so you can play together without installing extra packages."
+msgstr "يدعم QatanCraft البقاء الفردي دون اتصال واللعب الجماعي عبر الإنترنت. توفر الخوادم عوالمها ومحتواها لتلعبوا معًا دون حزم إضافية."
+
+#: QatanCraft custom UI
+msgid "Use the left touch area to move, drag the right side to look around, tap to interact, and hold to mine. Open your inventory to craft equipment and manage your resources."
+msgstr "استخدم منطقة اللمس اليسرى للحركة، واسحب الجهة اليمنى للنظر، واضغط للتفاعل، واضغط مطولًا للتعدين. افتح حقيبتك لصناعة المعدات وإدارة مواردك."
+
+#: QatanCraft custom UI
+msgid "QatanCraft online resources:"
+msgstr "موارد QatanCraft عبر الإنترنت:"
+
+#: QatanCraft custom UI
+msgid "Find updates, support, and community news on the project page."
+msgstr "ستجد التحديثات والدعم وأخبار المجتمع في صفحة المشروع."
+
+#: QatanCraft custom UI
+msgid "In-game guide: available from the Help menu."
+msgstr "الدليل داخل اللعبة متاح من قائمة المساعدة."
+
+#: QatanCraft custom UI
+msgid "Use the in-game Join Game tab to discover online worlds, or create a local world for offline survival."
+msgstr "استخدم تبويب اللعب الجماعي لاكتشاف العوالم، أو أنشئ عالمًا محليًا للبقاء دون اتصال."
+
+#: QatanCraft custom UI
+msgid "Community discussions: available through the QatanCraft project page."
+msgstr "تتوفر نقاشات المجتمع عبر صفحة مشروع QatanCraft."
+
+#: QatanCraft custom UI
+msgid "Share builds, report issues, and exchange survival tips with other players."
+msgstr "شارك مبانيك، أبلغ عن المشاكل، وتبادل نصائح البقاء مع اللاعبين."
+
+#: QatanCraft custom UI
+msgid "Community chat: follow the project page for current channels."
+msgstr "للدردشة المجتمعية، تابع صفحة المشروع للقنوات الحالية."
+
+#: QatanCraft custom UI
+msgid "Play together, ask questions, and share your discoveries with the community."
+msgstr "العبوا معًا، اطرحوا أسئلتكم، وشاركوا اكتشافاتكم مع المجتمع."
+
+#: QatanCraft custom UI
+msgid "QatanCraft: This game and survival experience"
+msgstr "QatanCraft: لعبة وتجربة البقاء هذه"
+
+#: QatanCraft custom UI
+msgid "Survival world: The world where you gather, craft, build, and explore"
+msgstr "عالم البقاء: العالم الذي تجمع فيه وتصنع وتبني وتستكشف"
+
+#: QatanCraft custom UI
+msgid "Game: A complete playing experience with its own rules, world, items, and progression"
+msgstr "اللعبة: تجربة متكاملة بقواعد وعالم وعناصر وتقدم خاص بها"
+
+#: QatanCraft custom UI
+msgid "There is a large variety of settings to configure QatanCraft. Pretty much every aspect can be changed that way."
+msgstr "توجد إعدادات كثيرة لتخصيص QatanCraft، ويمكن تغيير معظم جوانب التجربة من خلالها."
+
+#: QatanCraft custom UI
+msgid "Online content is not available in this build."
+msgstr "المحتوى عبر الإنترنت غير متاح في هذه النسخة."
+
+#: QatanCraft custom UI
+msgid "QatanCraft updated its controls system. Please review your key bindings."
+msgstr "حدّث QatanCraft نظام التحكم. راجع تعيينات الأزرار قبل اللعب."
+
+#: QatanCraft custom UI
+msgid "The default survival content is not installed"
+msgstr "لم يتم تثبيت محتوى البقاء الافتراضي"
+
+#: QatanCraft custom UI
+msgid "QatanCraft needs its survival content to continue. You can install it from the online content section."
+msgstr "يحتاج QatanCraft إلى محتوى البقاء للمتابعة. يمكنك تثبيته من قسم المحتوى عبر الإنترنت."
+
+#: QatanCraft custom UI
+msgid "Install the QatanCraft survival content to continue playing these worlds."
+msgstr "ثبّت محتوى بقاء QatanCraft لمتابعة اللعب في هذه العوالم."
+
+#: QatanCraft custom UI
+msgid "Install survival content"
+msgstr "تثبيت محتوى البقاء"

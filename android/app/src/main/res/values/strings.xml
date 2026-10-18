@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="label">QatanCraft</string>
-	<string name="survival_tagline">Build. Explore. Survive.</string>
-	<string name="loading">Loading&#8230;</string>
-	<string name="notification_channel_name">General notification</string>
-	<string name="notification_channel_description">QatanCraft notifications</string>
-	<string name="unzip_notification_title">Loading QatanCraft</string>
-	<string name="unzip_notification_description">Preparing your survival world&#8230;</string>
-	<string name="game_notification_title">QatanCraft is running</string>
-	<string name="ime_dialog_done">Done</string>
-	<string name="no_web_browser">No web browser found</string>
+	<string name="survival_tagline">ابنِ • استكشف • اصمد</string>
+	<string name="survival_subtitle">مغامرة بقاء طبيعية تبدأ من أول كتلة</string>
+	<string name="loading">جارٍ تجهيز عالمك&#8230;</string>
+	<string name="notification_channel_name">إشعارات عامة</string>
+	<string name="notification_channel_description">إشعارات QatanCraft</string>
+	<string name="unzip_notification_title">جارٍ تحميل QatanCraft</string>
+	<string name="unzip_notification_description">نجهّز عالم البقاء الخاص بك&#8230;</string>
+	<string name="game_notification_title">QatanCraft قيد التشغيل</string>
+	<string name="ime_dialog_done">تم</string>
+	<string name="no_web_browser">لم يتم العثور على متصفح</string>
 </resources>

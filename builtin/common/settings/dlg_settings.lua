@@ -181,7 +181,7 @@ local function load()
 	-- This list must be kept in sync with src/unsupported_language_list.txt.
 	get_setting_info("language").option_labels = {
 		[""] = fgettext_ne("(Use system language)"),
-		--ar = " [ar]", blacklisted
+			ar = "العربية [ar]",
 		be = "Беларуская [be]",
 		bg = "Български [bg]",
 		ca = "Català [ca]",

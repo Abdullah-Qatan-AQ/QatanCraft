@@ -5,9 +5,9 @@
 mm_game_theme = {}
 
 local COLORS = {
-	dark = { clouds = "#1c2a47", sky = "#090b1a" },
-	light = { clouds = "#f0f0ff", sky = "#8cbafa" },
-	halloween = { clouds = "#d2691e", sky = "#1a0b2e" },
+	dark = { clouds = "#385c55", sky = "#132b2a" },
+	light = { clouds = "#d8eadb", sky = "#7eb5a0" },
+	halloween = { clouds = "#b8753c", sky = "#3b2430" },
 }
 
 --------------------------------------------------------------------------------

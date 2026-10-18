@@ -5,7 +5,7 @@
 if not core.get_http_api then
 	function create_contentdb_dlg()
 		return messagebox("contentdb",
-				fgettext("ContentDB is not available when Luanti was compiled without cURL"))
+				fgettext("Online content is not available in this build."))
 	end
 	return
 end
