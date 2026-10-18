@@ -65,7 +65,8 @@ jobs:
           "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" | grep -F "package: name='com.qatancraft.survival'"
           "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose "$APK"
           unzip -l "$APK" | grep -E 'lib/(armeabi-v7a|arm64-v8a|x86|x86_64)/libqatancraft.so'
-          unzip -l "$APK" | grep -F 'assets/games/voxelibre/game.conf'
+          unzip -p "$APK" assets/assets.zip > /tmp/qatan-assets.zip
+          unzip -l /tmp/qatan-assets.zip | grep -F 'games/voxelibre/game.conf'
           cp "$APK" QatanCraft-Survival-universal.apk
           sha256sum QatanCraft-Survival-universal.apk
 
