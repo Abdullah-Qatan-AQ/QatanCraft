@@ -24,7 +24,7 @@ permissions:
 jobs:
   build-installable-apk:
     name: Build QatanCraft Survival universal APK
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 60
 
     steps:
