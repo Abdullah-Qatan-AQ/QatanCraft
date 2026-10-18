@@ -96,7 +96,13 @@ local function get_formspec(tabview, name, tabdata)
 	end
 
 	local retval =
-		-- Search
+		"style_type[button;bgcolor=#23483f;border=false;color=#f4e6c5;font_size=16]" ..
+		"style_type[button:hovered;bgcolor=#356b5a]" ..
+		"style_type[button:pressed;bgcolor=#17352f]" ..
+		"style_type[field;bgcolor=#102522;bordercolor=#5d967a;color=#f4e6c5]" ..
+		"style_type[textarea;bgcolor=#102522;bordercolor=#3d6f5d;color=#f4e6c5]" ..
+		"box[0,0;15.5,7.1;#081b1a]" ..
+			-- Search
 		"field[0.25,0.25;7,0.75;te_search;;" .. core.formspec_escape(tabdata.search_for) .. "]" ..
 		"tooltip[te_search;" .. core.formspec_escape(table.concat({
 				fgettext("Possible filters"),

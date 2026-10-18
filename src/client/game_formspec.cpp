@@ -382,7 +382,14 @@ void GameFormSpec::showPauseMenu()
 	float ypos = simple_singleplayer_mode ? 1.05f : 0.325f;
 	std::ostringstream os;
 
-	os << "formspec_version[2]" << SIZE_TAG;
+	os << "formspec_version[2]" << SIZE_TAG
+		<< "no_prepend[]"
+		<< "bgcolor[#081b1a;true]"
+		<< "style_type[button;bgcolor=#23483f;border=false;color=#f4e6c5;font_size=16]"
+		<< "style_type[button:hovered;bgcolor=#356b5a]"
+		<< "style_type[button:pressed;bgcolor=#17352f]"
+		<< "style_type[label;color=#f4e6c5]"
+		<< "style_type[textarea;bgcolor=#102522;bordercolor=#3d6f5d;color=#dbe9c7]";
 
 	if (simple_singleplayer_mode) {
 		os << "style_type[label;halign=center;valign=center]";
@@ -424,7 +431,7 @@ void GameFormSpec::showPauseMenu()
 	if (!control_text.empty()) {
 		os << "textarea[9.25,0.8;4.625,6.1;;" << control_text << ";]";
 	}
-	os << "textarea[0.375,0.8;4.625,6.075;;" << PROJECT_NAME_C " " VERSION_STRING "\n"
+	os << "textarea[0.375,0.8;4.625,6.075;;QatanCraft Survival\n"
 		<< "\n" <<  strgettext("Game info:") << "\n";
 
 	const std::string &address = m_client->getAddressName();

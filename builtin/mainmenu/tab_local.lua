@@ -163,7 +163,15 @@ local function get_formspec(tabview, name, tabdata)
 			"button[5.25,", button_y, ";5,1.2;game_open_cdb;", fgettext("Install a game"), "]"})
 	end
 
-	local retval = ""
+	local retval = table.concat({
+		"style_type[button;bgcolor=#23483f;border=false;color=#f4e6c5;font_size=16]",
+		"style_type[button:hovered;bgcolor=#356b5a]",
+		"style_type[button:pressed;bgcolor=#17352f]",
+		"style_type[checkbox;bgcolor=#102522;color=#dbe9c7]",
+		"style_type[tabheader;bgcolor=#102522;color=#f4e6c5]",
+		"style_type[field;bgcolor=#102522;bordercolor=#5d967a;color=#f4e6c5]",
+		"box[0,0;15.5,7.1;#081b1a]",
+	}, "")
 
 	local index = core.get_textlist_index("sp_worlds") or filterlist.get_current_index(menudata.worldlist,
 				tonumber(core.settings:get("mainmenu_last_selected_world"))) or 0
