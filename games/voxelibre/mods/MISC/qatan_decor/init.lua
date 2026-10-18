@@ -1,10 +1,48 @@
 local S = minetest.get_translator("qatan_decor")
+local modname = minetest.get_current_modname()
 local wood = "mcl_core:wood"
 local stone = "mcl_core:cobble"
 local empty = "air"
 local wood_sounds = mcl_sounds.node_sound_wood_defaults()
+local furniture_forms = {}
+local seated = {}
 
-local function furniture_node(name, description, box, tiles)
+local function inventory_formspec(pos, title, slots)
+	return table.concat({
+		"formspec_version[6]", "size[10,8]", "no_prepend[]",
+		"box[0,0;10,8;#101722]", "box[0.35,0.35;9.3,0.8;#16313b]",
+		"label[0.7,0.58;QatanCraft • ", title, "]",
+		"list[nodemeta:", pos.x, ",", pos.y, ",", pos.z, ";main;0.7,1.55;", slots, ",1;]",
+		"list[current_player;main;0.7,3.55;8,3;]",
+		"listring[nodemeta:", pos.x, ",", pos.y, ",", pos.z, ";main]",
+		"listring[current_player;main]",
+		"button_exit[7.1,7.2;2.2,0.6;close;إغلاق]",
+	}, "")
+end
+
+local function chair_formspec(pos, sitting)
+	return table.concat({
+		"formspec_version[6]", "size[8,5]", "no_prepend[]",
+		"box[0,0;8,5;#101722]", "box[0.3,0.3;7.4,0.8;#16313b]",
+		"label[0.65,0.58;QatanCraft • كرسي خشبي]",
+		"label[0.65,1.6;", sitting and "أنت جالس الآن." or "اجلس لاستعادة الهدوء أثناء البناء.", "]",
+		sitting and "button[0.8,2.55;6.4,0.9;qatan_stand;الوقوف]" or "button[0.8,2.55;6.4,0.9;qatan_sit;الجلوس]",
+		"button_exit[2.3,4.0;3.4,0.6;close;إغلاق]",
+	}, "")
+end
+
+local function set_seated(player, value)
+	local name = player:get_player_name()
+	seated[name] = value or nil
+	player:get_meta():set_int("qatan_seated", value and 1 or 0)
+	player:set_physics_override({speed = value and 0 or 1, jump = value and 0 or 1, sneak = value and 0 or 1})
+	if value then
+		player:set_velocity({x = 0, y = 0, z = 0})
+	end
+end
+
+local function furniture_node(name, description, box, tiles, opts)
+	opts = opts or {}
 	minetest.register_node("qatan_decor:" .. name, {
 		description = S(description),
 		tiles = tiles or {"default_wood.png"},
@@ -16,58 +54,56 @@ local function furniture_node(name, description, box, tiles)
 		groups = {handy = 1, axey = 1, deco_block = 1},
 		sounds = wood_sounds,
 		node_box = {type = "fixed", fixed = box},
+		on_construct = opts.storage and function(pos)
+			local inv = minetest.get_meta(pos):get_inventory()
+			inv:set_size("main", opts.storage)
+		end or nil,
+		on_destruct = opts.storage and function(pos)
+			local inv = minetest.get_meta(pos):get_inventory()
+			for _, stack in ipairs(inv:get_list("main") or {}) do
+				if not stack:is_empty() then minetest.add_item(pos, stack) end
+			end
+		end or nil,
+		on_rightclick = function(pos, _, clicker)
+			if not clicker or not clicker:is_player() then return end
+			local key = minetest.pos_to_string(pos)
+			if opts.chair then
+				furniture_forms[clicker:get_player_name()] = key
+				minetest.show_formspec(clicker:get_player_name(), modname .. ":chair", chair_formspec(pos, seated[clicker:get_player_name()] ~= nil))
+			elseif opts.storage then
+				furniture_forms[clicker:get_player_name()] = key
+				minetest.show_formspec(clicker:get_player_name(), modname .. ":storage", inventory_formspec(pos, description, opts.storage))
+			end
+		end,
 	})
 end
 
 furniture_node("wooden_table", "Wooden Table", {
-	{-0.42, -0.5, -0.42, 0.42, -0.34, 0.42},
-	{-0.34, -0.34, -0.34, -0.20, 0.5, -0.20},
-	{0.20, -0.34, -0.34, 0.34, 0.5, -0.20},
-	{-0.34, -0.34, 0.20, -0.20, 0.5, 0.34},
-	{0.20, -0.34, 0.20, 0.34, 0.5, 0.34},
-})
+	{-0.42, -0.5, -0.42, 0.42, -0.34, 0.42}, {-0.34, -0.34, -0.34, -0.20, 0.5, -0.20},
+	{0.20, -0.34, -0.34, 0.34, 0.5, -0.20}, {-0.34, -0.34, 0.20, -0.20, 0.5, 0.34}, {0.20, -0.34, 0.20, 0.34, 0.5, 0.34},
+}, nil, {storage = 9})
 
 furniture_node("wooden_chair", "Wooden Chair", {
-	{-0.42, -0.5, -0.42, 0.42, -0.34, 0.42},
-	{-0.34, -0.34, -0.34, -0.20, 0.5, -0.20},
-	{0.20, -0.34, -0.34, 0.34, 0.5, -0.20},
-	{-0.34, -0.34, 0.20, -0.20, 0.5, 0.34},
-	{0.20, -0.34, 0.20, 0.34, 0.5, 0.34},
+	{-0.42, -0.5, -0.42, 0.42, -0.34, 0.42}, {-0.34, -0.34, -0.34, -0.20, 0.5, -0.20},
+	{0.20, -0.34, -0.34, 0.34, 0.5, -0.20}, {-0.34, -0.34, 0.20, -0.20, 0.5, 0.34}, {0.20, -0.34, 0.20, 0.34, 0.5, 0.34},
 	{-0.45, 0.15, 0.28, 0.45, 0.5, 0.42},
-})
+}, nil, {chair = true})
 
 furniture_node("wall_shelf", "Wall Shelf", {
-	{-0.46, -0.46, -0.5, 0.46, -0.32, -0.24},
-	{-0.46, 0.1, -0.5, 0.46, 0.24, -0.24},
-	{-0.46, -0.46, -0.35, -0.32, 0.24, -0.24},
-	{0.32, -0.46, -0.35, 0.46, 0.24, -0.24},
-})
+	{-0.46, -0.46, -0.5, 0.46, -0.32, -0.24}, {-0.46, 0.1, -0.5, 0.46, 0.24, -0.24},
+	{-0.46, -0.46, -0.35, -0.32, 0.24, -0.24}, {0.32, -0.46, -0.35, 0.46, 0.24, -0.24},
+}, nil, {storage = 6})
 
 furniture_node("planter_box", "Planter Box", {
-	{-0.46, -0.5, -0.42, 0.46, -0.28, 0.42},
-	{-0.46, -0.28, -0.42, -0.32, 0.22, 0.42},
-	{0.32, -0.28, -0.42, 0.46, 0.22, 0.42},
-	{-0.46, -0.28, -0.42, 0.46, 0.22, -0.28},
-	{-0.46, -0.28, 0.28, 0.46, 0.22, 0.42},
-	{-0.32, -0.28, -0.28, 0.32, -0.08, 0.28},
-})
+	{-0.46, -0.5, -0.42, 0.46, -0.28, 0.42}, {-0.46, -0.28, -0.42, -0.32, 0.22, 0.42},
+	{0.32, -0.28, -0.42, 0.46, 0.22, 0.42}, {-0.46, -0.28, -0.42, 0.46, 0.22, -0.28},
+	{-0.46, -0.28, 0.28, 0.46, 0.22, 0.42}, {-0.32, -0.28, -0.28, 0.32, -0.08, 0.28},
+}, nil, {storage = 1})
 
-minetest.register_craft({
-	output = "qatan_decor:wooden_table",
-	recipe = {{wood, wood, wood}, {empty, "mcl_core:stick", empty}, {empty, "mcl_core:stick", empty}},
-})
-minetest.register_craft({
-	output = "qatan_decor:wooden_chair",
-	recipe = {{wood, empty}, {wood, wood}, {"mcl_core:stick", empty}},
-})
-minetest.register_craft({
-	output = "qatan_decor:wall_shelf",
-	recipe = {{wood, wood, wood}, {"mcl_core:stick", "mcl_core:stick", "mcl_core:stick"}},
-})
-minetest.register_craft({
-	output = "qatan_decor:planter_box",
-	recipe = {{wood, wood, wood}, {wood, "mcl_core:dirt", wood}},
-})
+minetest.register_craft({output = "qatan_decor:wooden_table", recipe = {{wood, wood, wood}, {empty, "mcl_core:stick", empty}, {empty, "mcl_core:stick", empty}}})
+minetest.register_craft({output = "qatan_decor:wooden_chair", recipe = {{wood, empty}, {wood, wood}, {"mcl_core:stick", empty}}})
+minetest.register_craft({output = "qatan_decor:wall_shelf", recipe = {{wood, wood, wood}, {"mcl_core:stick", "mcl_core:stick", "mcl_core:stick"}}})
+minetest.register_craft({output = "qatan_decor:planter_box", recipe = {{wood, wood, wood}, {wood, "mcl_core:dirt", wood}}})
 
 local function set_node(pos, name)
 	local old = minetest.get_node_or_nil(pos)
@@ -78,56 +114,48 @@ end
 
 local function build_camp(origin, variant)
 	local x, y, z = origin.x, origin.y, origin.z
-	for dx = -3, 3 do
-		for dz = -3, 3 do
-			if math.abs(dx) == 3 or math.abs(dz) == 3 or (dx + dz) % 2 == 0 then
-				minetest.set_node({x = x + dx, y = y, z = z + dz}, {name = stone})
-			end
-		end
-	end
-	for _, p in ipairs({{-2, -2}, {2, -2}, {-2, 2}, {2, 2}}) do
-		for h = 1, 3 do
-			minetest.set_node({x = x + p[1], y = y + h, z = z + p[2]}, {name = wood})
-		end
-	end
-	for dx = -2, 2 do
-		for dz = -2, 2 do
-			if math.abs(dx) == 2 or math.abs(dz) == 2 then
-				minetest.set_node({x = x + dx, y = y + 4, z = z + dz}, {name = wood})
-			end
-		end
-	end
+	for dx = -3, 3 do for dz = -3, 3 do
+		if math.abs(dx) == 3 or math.abs(dz) == 3 or (dx + dz) % 2 == 0 then minetest.set_node({x = x + dx, y = y, z = z + dz}, {name = stone}) end
+	end end
+	for _, p in ipairs({{-2, -2}, {2, -2}, {-2, 2}, {2, 2}}) do for h = 1, 3 do minetest.set_node({x = x + p[1], y = y + h, z = z + p[2]}, {name = wood}) end end
+	for dx = -2, 2 do for dz = -2, 2 do if math.abs(dx) == 2 or math.abs(dz) == 2 then minetest.set_node({x = x + dx, y = y + 4, z = z + dz}, {name = wood}) end end end
 	set_node({x = x, y = y + 1, z = z}, "mcl_campfires:campfire")
 	set_node({x = x - 1, y = y + 1, z = z + 1}, "qatan_decor:wooden_table")
 	set_node({x = x + 1, y = y + 1, z = z + 1}, "qatan_decor:wooden_chair")
 	set_node({x = x, y = y + 1, z = z - 2}, "mcl_torches:torch")
-	if variant then
-		set_node({x = x + 2, y = y + 1, z = z}, "qatan_decor:planter_box")
-	end
+	if variant then set_node({x = x + 2, y = y + 1, z = z}, "qatan_decor:planter_box") end
 end
 
 local function build_shrine(origin)
 	local x, y, z = origin.x, origin.y, origin.z
-	for dx = -2, 2 do
-		for dz = -2, 2 do
-			minetest.set_node({x = x + dx, y = y, z = z + dz}, {name = stone})
-		end
-	end
-	for _, p in ipairs({{-2, -2}, {2, -2}, {-2, 2}, {2, 2}}) do
-		for h = 1, 4 do
-			minetest.set_node({x = x + p[1], y = y + h, z = z + p[2]}, {name = stone})
-		end
-	end
-	for dx = -2, 2 do
-		for dz = -2, 2 do
-			if math.abs(dx) == 2 or math.abs(dz) == 2 then
-				minetest.set_node({x = x + dx, y = y + 5, z = z + dz}, {name = stone})
-			end
-		end
-	end
+	for dx = -2, 2 do for dz = -2, 2 do minetest.set_node({x = x + dx, y = y, z = z + dz}, {name = stone}) end end
+	for _, p in ipairs({{-2, -2}, {2, -2}, {-2, 2}, {2, 2}}) do for h = 1, 4 do minetest.set_node({x = x + p[1], y = y + h, z = z + p[2]}, {name = stone}) end end
+	for dx = -2, 2 do for dz = -2, 2 do if math.abs(dx) == 2 or math.abs(dz) == 2 then minetest.set_node({x = x + dx, y = y + 5, z = z + dz}, {name = stone}) end end end
 	set_node({x = x, y = y + 1, z = z}, "mcl_torches:torch")
 	set_node({x = x, y = y + 1, z = z + 1}, "qatan_decor:wall_shelf")
 end
+
+minetest.register_on_player_receive_fields(function(player, formname, fields)
+	if formname == modname .. ":chair" then
+		if fields.qatan_sit then set_seated(player, true)
+		elseif fields.qatan_stand then set_seated(player, false) end
+		if fields.qatan_sit or fields.qatan_stand then
+			local pos = minetest.string_to_pos(furniture_forms[player:get_player_name()] or "")
+			if pos then minetest.show_formspec(player:get_player_name(), formname, chair_formspec(pos, seated[player:get_player_name()] ~= nil)) end
+		end
+		return true
+	end
+	return false
+end)
+
+minetest.register_on_leaveplayer(function(player)
+	if seated[player:get_player_name()] then set_seated(player, false) end
+	furniture_forms[player:get_player_name()] = nil
+end)
+
+minetest.register_on_dieplayer(function(player)
+	if seated[player:get_player_name()] then set_seated(player, false) end
+end)
 
 minetest.register_on_generated(function(minp, maxp, blockseed)
 	if minp.y > 120 or maxp.y < 1 or blockseed % 37 ~= 0 then return end
@@ -140,6 +168,5 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 	if not surface or surface < 2 or surface > 110 then return end
 	local ground = minetest.get_node_or_nil({x = cx, y = surface, z = cz})
 	if not ground or minetest.get_item_group(ground.name, "soil") == 0 then return end
-	if blockseed % 3 == 0 then build_shrine({x = cx, y = surface + 1, z = cz})
-	else build_camp({x = cx, y = surface + 1, z = cz}, blockseed % 2 == 0) end
+	if blockseed % 3 == 0 then build_shrine({x = cx, y = surface + 1, z = cz}) else build_camp({x = cx, y = surface + 1, z = cz}, blockseed % 2 == 0) end
 end)

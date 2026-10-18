@@ -541,22 +541,22 @@ local function get_formspec(dialogdata)
 		-- HACK: this is needed to allow resubmitting the same formspec
 		formspec_show_hack and " " or "",
 
-		"box[0,0;", tostring(tabsize.width), ",", tostring(tabsize.height), ";#0000008C]",
+			"box[0,0;", tostring(tabsize.width), ",", tostring(tabsize.height), ";#101722F2]",
 
 		("button[0,%f;%f,0.8;back;%s]"):format(
 				tabsize.height + 0.2, back_w,
 				-- TRANSLATORS: Button text to go back
 				fgettext("Back")),
 
-		("box[%f,%f;%f,0.8;#0000008C]"):format(
-			back_w + 0.2, tabsize.height + 0.2, checkbox_w),
+			("box[%f,%f;%f,0.8;#16313B]"):format(
+				back_w + 0.2, tabsize.height + 0.2, checkbox_w),
 		("checkbox[%f,%f;show_technical_names;%s;%s]"):format(
 			back_w + 2*0.2, tabsize.height + 0.6,
 			-- TRANSLATORS: Checkbox that toggles displaying the technical setting names
 			fgettext("Show technical names"), tostring(show_technical_names)),
 
-		("box[%f,%f;%f,0.8;#0000008C]"):format(
-			back_w + 2*0.2 + checkbox_w, tabsize.height + 0.2, checkbox_w),
+			("box[%f,%f;%f,0.8;#16313B]"):format(
+				back_w + 2*0.2 + checkbox_w, tabsize.height + 0.2, checkbox_w),
 		("checkbox[%f,%f;show_advanced;%s;%s]"):format(
 			back_w + 3*0.2 + checkbox_w, tabsize.height + 0.6,
 			fgettext("Show advanced settings"), tostring(show_advanced)),
@@ -574,8 +574,13 @@ local function get_formspec(dialogdata)
 		"container_end[]",
 		("scroll_container[0.25,1.25;%f,%f;leftscroll;vertical;0.1;0]"):format(
 			left_pane_width, tabsize.height - 1.5),
-		"style_type[button;border=false;bgcolor=#3333]",
-		"style_type[button:hover;border=false;bgcolor=#6663]",
+			"style_type[button;border=false;bgcolor=#23483f;color=#f4e6c5;font_size=16]",
+			"style_type[button:hovered;border=false;bgcolor=#356b5a;color=#fff4d6]",
+			"style_type[button:pressed;border=false;bgcolor=#17352f;color=#fff4d6]",
+			"style_type[checkbox;bgcolor=#102522;color=#dbe9c7]",
+			"style_type[field;bgcolor=#102522;bordercolor=#5d967a;color=#f4e6c5]",
+			"style_type[dropdown;bgcolor=#102522;bordercolor=#5d967a;color=#f4e6c5]",
+			"style_type[scrollbar;bgcolor=#23483f]",
 	}
 
 	local y = 0
@@ -587,8 +592,8 @@ local function get_formspec(dialogdata)
 			last_section = other_page.section
 			y = y + 0.82
 		end
-		fs[#fs + 1] = ("box[0,%f;%f,0.8;%s]"):format(
-			y, left_pane_width-left_pane_padding, other_page.id == page_id and "#467832FF" or "#3339")
+			fs[#fs + 1] = ("box[0,%f;%f,0.8;%s]"):format(
+				y, left_pane_width-left_pane_padding, other_page.id == page_id and "#356B5AFF" or "#1C3540CC")
 		fs[#fs + 1] = ("button[0,%f;%f,0.8;page_%s;%s]")
 			:format(y, left_pane_width-left_pane_padding, other_page.id, fgettext(other_page.title))
 		y = y + 0.82

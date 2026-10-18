@@ -85,6 +85,22 @@ vec3 applySaturation(vec3 color, float factor)
 	return mix(vec3(brightness), color, factor);
 }
 
+// QatanCraft nature grade: a restrained warm highlight / cool shadow split
+// that keeps the voxel palette readable on mobile displays.
+vec3 applyNatureGrade(vec3 color, vec2 uv)
+{
+	float luminance = dot(color, vec3(0.2125, 0.7154, 0.0721));
+	vec3 warm_highlights = vec3(1.018, 1.006, 0.982);
+	vec3 cool_shadows = vec3(0.985, 1.006, 1.018);
+	float highlight = smoothstep(0.38, 0.9, luminance);
+	color *= mix(cool_shadows, warm_highlights, highlight);
+
+	// A very light vignette improves focus without hiding touch targets.
+	vec2 centered = uv - vec2(0.5);
+	float edge = smoothstep(0.82, 0.28, dot(centered, centered));
+	return color * mix(0.965, 1.0, edge);
+}
+
 #ifdef ENABLE_DITHERING
 // From http://alex.vlachos.com/graphics/Alex_Vlachos_Advanced_VR_Rendering_GDC2015.pdf
 // and https://www.shadertoy.com/view/MslGR8 (5th one starting from the bottom)
@@ -141,10 +157,11 @@ void main(void)
 	{
 #if ENABLE_TONE_MAPPING
 		color = applyToneMapping(color);
-#endif
+	#endif
 
-		color.rgb = applySaturation(color.rgb, saturation);
-	}
+			color.rgb = applySaturation(color.rgb, saturation);
+			color.rgb = applyNatureGrade(color.rgb, uv);
+		}
 
 #ifdef ENABLE_DITHERING
 	// Apply dithering just before quantisation

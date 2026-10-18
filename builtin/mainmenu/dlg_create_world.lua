@@ -272,7 +272,13 @@ local function create_world_formspec(dialogdata)
 	end
 
 	local retval =
-		"size[12.25,7.4,true]" ..
+			"formspec_version[6]" ..
+			"bgcolor[#101722;true]" ..
+			"style_type[button;bgcolor=#23483f;border=false;color=#f4e6c5;font_size=16]" ..
+			"style_type[button:hovered;bgcolor=#356b5a]" ..
+			"style_type[field;bgcolor=#102522;bordercolor=#5d967a;color=#f4e6c5]" ..
+			"style_type[dropdown;bgcolor=#102522;bordercolor=#5d967a;color=#f4e6c5]" ..
+			"size[12.25,7.4,true]" ..
 
 		-- Left side
 		"container[0,0]"..

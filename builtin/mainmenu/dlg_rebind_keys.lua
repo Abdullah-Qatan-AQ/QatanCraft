@@ -17,6 +17,9 @@ local function get_formspec(dialogdata)
 	return table.concat({
 		"formspec_version[6]",
 		"size[12,7]",
+		"bgcolor[#101722;true]",
+		"style_type[button;bgcolor=#23483f;border=false;color=#f4e6c5;font_size=16]",
+		"style_type[button:hovered;bgcolor=#356b5a]",
 		"hypertext[0.5,0.5;11,4.7;text;", core.formspec_escape(markup), "]",
 		"container[0.5,5.7]",
 		"button[0,0;4,0.8;dismiss;", fgettext("Close"), "]",

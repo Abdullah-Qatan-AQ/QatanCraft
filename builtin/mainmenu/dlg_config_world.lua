@@ -99,7 +99,13 @@ local function get_formspec(data)
 	local mod = all_mods[data.selected_mod] or {name = ""}
 
 	local retval =
-		"size[11.5,7.5,true]" ..
+			"formspec_version[6]" ..
+			"bgcolor[#101722;true]" ..
+			"style_type[button;bgcolor=#23483f;border=false;color=#f4e6c5;font_size=16]" ..
+			"style_type[button:hovered;bgcolor=#356b5a]" ..
+			"style_type[textarea;bgcolor=#102522;bordercolor=#3d6f5d;color=#f4e6c5]" ..
+			"style_type[checkbox;bgcolor=#102522;color=#dbe9c7]" ..
+			"size[11.5,7.5,true]" ..
 		"label[0.5,0;" .. fgettext("World:") .. "]" ..
 		"label[1.75,0;" .. core.formspec_escape(data.worldspec.name) .. "]"
 

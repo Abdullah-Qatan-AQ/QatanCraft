@@ -193,8 +193,14 @@ local function get_formspec(dialogdata)
 		comment_text = fgettext_ne(setting.comment)
 	end
 
-	return (
-		"size[" .. width .. "," .. height + 0.25 .. ",true]" ..
+		return (
+			"formspec_version[6]" ..
+			"bgcolor[#101722;true]" ..
+			"style_type[button;bgcolor=#23483f;border=false;color=#f4e6c5;font_size=16]" ..
+			"style_type[button:hovered;bgcolor=#356b5a]" ..
+			"style_type[field;bgcolor=#102522;bordercolor=#5d967a;color=#f4e6c5]" ..
+			"style_type[checkbox;bgcolor=#102522;color=#dbe9c7]" ..
+			"size[" .. width .. "," .. height + 0.25 .. ",true]" ..
 		create_textfield(description_box, setting_name, comment_text) ..
 		formspec ..
 		"button[" .. width / 2 - 2.5 .. "," .. height - 0.4 .. ";2.5,1;btn_done;" ..
