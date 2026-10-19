@@ -51,6 +51,16 @@ jobs:
         run: |
           sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0" "cmake;3.22.1" "ndk;30.0.16248370"
 
+      - name: Configure stable QatanCraft signing
+        working-directory: android
+        run: |
+          cat >> local.properties <<'EOF'
+          keystore=${{ github.workspace }}/android/qatancraft-release.jks
+          keystore.password=QatanCraftRelease2026
+          key=qatancraft
+          key.password=QatanCraftRelease2026
+          EOF
+
       - name: Build signed universal production APK
         working-directory: android
         run: |
