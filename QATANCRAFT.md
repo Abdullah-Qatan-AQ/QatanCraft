@@ -20,6 +20,8 @@ android/app/build/outputs/apk/release/
 
 ينفّذ GitHub Actions البناء تلقائيًا، ويتحقق من اسم الحزمة ووجود المكتبة الأصلية ومحتوى VoxeLibre، ثم يرفع ملف `QatanCraft-Survival-universal.apk` إلى **GitHub Release مسودة** باسم `qatan-survival-<run-id>`.
 
+يستخدم الـWorkflow مفتاح توقيع QatanCraft ثابتًا بدل مفتاح Android Debug المتغير بين عمال البناء، حتى تتمكن الإصدارات اللاحقة من تحديث التطبيق دون تعارض توقيع. الإصدارات القديمة الموقعة بمفاتيح Debug مختلفة تحتاج إلى إزالة النسخة القديمة مرة واحدة قبل تثبيت أول إصدار ثابت.
+
 ## مكونات التجربة
 
 - نسخة إنتاجية موقعة من QatanCraft بدون تحذير Debug أو وسم `-dev-debug`.

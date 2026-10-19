@@ -54,10 +54,9 @@ end
 
 local function get_formspec(dialogdata)
 	local markup = table.concat({
-		"<big>", hgettext("Minetest Game is no longer installed by default"), "</big>\n",
-		hgettext("For a long time, Luanti shipped with a default game called \"Minetest Game\". " ..
-				"Since version 5.8.0, Luanti ships without a default game."), "\n",
-		hgettext("If you want to continue playing in your Minetest Game worlds, you need to reinstall Minetest Game."),
+		"<big>", hgettext("QatanCraft Survival content is not installed"), "</big>\n",
+		hgettext("The survival content required for this world is missing from the installation."), "\n",
+		hgettext("Install the QatanCraft survival content to continue playing these worlds."),
 	})
 
 	return table.concat({
@@ -68,7 +67,7 @@ local function get_formspec(dialogdata)
 		"style[dismiss;bgcolor=red]",
 		-- TRANSLATORS: Dismiss a dialog window/message
 		"button[0,0;4,0.8;dismiss;", fgettext("Dismiss"), "]",
-		"button[4.25,0;8,0.8;reinstall;", fgettext("Reinstall Minetest Game"), "]",
+		"button[4.25,0;8,0.8;reinstall;", fgettext("Install survival content"), "]",
 		"container_end[]",
 	})
 end

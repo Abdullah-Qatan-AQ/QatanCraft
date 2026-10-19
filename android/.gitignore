@@ -6,6 +6,8 @@ app/release
 app/src/main/assets
 build
 local.properties
+*.jks
+*.keystore
 native/.*
 native/build
 native/deps
