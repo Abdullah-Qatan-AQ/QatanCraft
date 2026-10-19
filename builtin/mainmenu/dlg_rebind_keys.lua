@@ -8,7 +8,7 @@ local doc_url = "https://docs.luanti.org/for-players/controls/"
 local function get_formspec(dialogdata)
 	local markup = table.concat({
 		"<big>" .. hgettext("Keybindings changed") .. "</big>",
-		hgettext("QatanCraft updated its controls system. Please review your key bindings."),
+		hgettext("The input handling system was reworked in Luanti 5.12.0."),
 		hgettext("As a result, your keybindings may have been changed."),
 		hgettext("Check out the key settings or refer to the documentation:"),
 		("<action name='doc_url'><style color='cyan' hovercolor='orangered'>%s</style></action>"):format(doc_url),
@@ -17,9 +17,6 @@ local function get_formspec(dialogdata)
 	return table.concat({
 		"formspec_version[6]",
 		"size[12,7]",
-		"bgcolor[#101722;true]",
-		"style_type[button;bgcolor=#23483f;border=false;color=#f4e6c5;font_size=16]",
-		"style_type[button:hovered;bgcolor=#356b5a]",
 		"hypertext[0.5,0.5;11,4.7;text;", core.formspec_escape(markup), "]",
 		"container[0.5,5.7]",
 		"button[0,0;4,0.8;dismiss;", fgettext("Close"), "]",
