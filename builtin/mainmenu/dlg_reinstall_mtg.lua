@@ -76,11 +76,10 @@ local function buttonhandler(this, fields)
 	if fields.reinstall then
 		local parent = this.parent
 
-		-- Don't set "no_mtg_notification" here so that the dialog will be shown
-		-- again if downloading MTG fails for whatever reason.
-		this:delete()
+			-- Keep the dialog available if the required survival content is still missing.
+			this:delete()
 
-		local dlg = create_contentdb_dlg(nil, "minetest/minetest")
+			local dlg = create_contentdb_dlg()
 		dlg:set_parent(parent)
 		parent:hide()
 		dlg:show()
