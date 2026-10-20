@@ -33,7 +33,8 @@ jobs:
       env:
         CC: clang
         CXX: clang++
-        CMAKE_FLAGS: "-DENABLE_GETTEXT=0 -DBUILD_SERVER=0 -DBUILD_UNITTESTS=0"
+        CMAKE_FLAGS: "-DENABLE_GETTEXT=0 -DBUILD_UNITTESTS=0"
+        CMAKE_BUILD_SERVER: "TRUE"
 
     - name: Integration test + devtest
       run: |
