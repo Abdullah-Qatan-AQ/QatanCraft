@@ -7,6 +7,23 @@ local function is_still_visible(dlg)
 	return this == dlg and not dlg.hidden
 end
 
+local function debit_for_package(data)
+	if data.wallet_charged then return true end
+	local ok, price, balance = qatan_wallet.debit(data.package)
+	if not ok then
+		local parent = data.dlg.parent
+		data.dlg:delete()
+		local dlg = messagebox("qatan_wallet_error",
+			fgettext("Not enough QatanCraft Coins. Required: $1 | Available: $2", price, balance))
+		dlg:set_parent(parent)
+		parent:hide()
+		dlg:show()
+		return false
+	end
+	data.wallet_charged = true
+	return true
+end
+
 
 local function get_loading_formspec()
 	local TOUCH_GUI = core.settings:get_bool("touch_gui")
@@ -159,6 +176,7 @@ local function handle_submit(this, fields)
 	end
 
 	if fields.install_all then
+		if not debit_for_package(data) then return true end
 		contentdb.queue_download(data.package, contentdb.REASON_NEW)
 
 		if data.will_install_deps then
@@ -203,9 +221,11 @@ local function load_deps(dlg)
 			dlg2:set_parent(parent)
 			parent:hide()
 			dlg2:show()
-		elseif result == false then
-			contentdb.queue_download(package, package.path and contentdb.REASON_UPDATE or contentdb.REASON_NEW)
-			dlg:delete()
+			elseif result == false then
+				if debit_for_package(dlg.data) then
+					contentdb.queue_download(package, package.path and contentdb.REASON_UPDATE or contentdb.REASON_NEW)
+					dlg:delete()
+				end
 		else
 			assert(result == true)
 			dlg.data.has_hard_deps_ready = true

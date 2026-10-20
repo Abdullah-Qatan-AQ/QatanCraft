@@ -4,6 +4,31 @@ local sessions = {}
 local MAX_COINS = 1000000
 local MAX_XP = 100000000
 local MAX_LEVEL = 1000
+local WALLET_SALT = 17382941
+
+local function wallet_mac(balance, nonce)
+	return tostring((balance * 1103515245 + nonce * 12345 + WALLET_SALT) % 2147483647)
+end
+
+local function wallet_read()
+	local balance = tonumber(minetest.settings:get("qatan_wallet_balance")) or 0
+	local nonce = tonumber(minetest.settings:get("qatan_wallet_nonce")) or 0
+	local mac = minetest.settings:get("qatan_wallet_mac") or ""
+	if balance < 0 or balance > MAX_COINS or nonce < 0 or mac ~= wallet_mac(balance, nonce) then
+		return 0, math.max(0, math.floor(nonce))
+	end
+	return math.floor(balance), math.floor(nonce)
+end
+
+local function wallet_write(balance, nonce)
+	balance = math.max(0, math.min(MAX_COINS, math.floor(balance)))
+	nonce = math.max(0, math.floor(nonce))
+	minetest.settings:set("qatan_wallet_balance", tostring(balance))
+	minetest.settings:set("qatan_wallet_nonce", tostring(nonce))
+	minetest.settings:set("qatan_wallet_mac", wallet_mac(balance, nonce))
+	if minetest.settings.write then minetest.settings:write() end
+	return balance
+end
 
 local function default_data()
 	return {coins = 0, xp = 0, level = 1, achievements = {}}
@@ -17,6 +42,7 @@ local function load_data(name)
 	data.xp = math.max(0, math.min(MAX_XP, math.floor(tonumber(data.xp) or 0)))
 	data.level = math.max(1, math.min(MAX_LEVEL, math.floor(tonumber(data.level) or 1)))
 	data.achievements = type(data.achievements) == "table" and data.achievements or {}
+	data.coins = wallet_read()
 	return data
 end
 
@@ -61,7 +87,8 @@ local function award_progress(player, def)
 	local data, name = data_for(player)
 	if not def or not def.qatan_id or data.achievements[def.qatan_id] then return false end
 	data.achievements[def.qatan_id] = {title = def.title, at = os.time()}
-	data.coins = math.min(MAX_COINS, data.coins + math.max(0, math.floor(def.coins or 0)))
+	local balance, nonce = wallet_read()
+	data.coins = wallet_write(balance + math.max(0, math.floor(def.coins or 0)), nonce + 1)
 	data.xp = math.min(MAX_XP, data.xp + math.max(0, math.floor(def.xp or 0)))
 	local old_level = data.level
 	data.level = level_for_xp(data.xp)
@@ -153,8 +180,9 @@ end)
 _G.qatan_progress = {
 	get = function(player) return data_for(player) end,
 	grant = function(player, coins, xp)
-		local data, name = data_for(player)
-		data.coins = math.min(MAX_COINS, data.coins + math.max(0, math.floor(coins or 0)))
+			local data, name = data_for(player)
+			local balance, nonce = wallet_read()
+			data.coins = wallet_write(balance + math.max(0, math.floor(coins or 0)), nonce + 1)
 		data.xp = math.min(MAX_XP, data.xp + math.max(0, math.floor(xp or 0)))
 		data.level = level_for_xp(data.xp)
 		save_data(name, data)

@@ -144,10 +144,11 @@ local function get_formspec(data)
 		formspec[#formspec + 1] = "style[queued;border=false]"
 		formspec[#formspec + 1] = "image_button[5,0;1,1;" .. core.formspec_escape(defaulttexturedir)
 		formspec[#formspec + 1] = "cdb_queued.png;queued;]"
-	elseif not package.path then
-		-- TRANSLATORS: $1 = download size
-		local label = info and fgettext("Install [$1]", info.download_size) or
-			fgettext("Install")
+		elseif not package.path then
+			-- TRANSLATORS: $1 = download size
+			local label = info and fgettext("Install [$1] • $2 Coins", info.download_size,
+				qatan_wallet.price(package)) or
+				fgettext("Install • $1 Coins", qatan_wallet.price(package))
 		formspec[#formspec + 1] = "style[install;bgcolor=green]"
 		formspec[#formspec + 1] = "button["
 		formspec[#formspec + 1] = right_button_rect
@@ -160,8 +161,8 @@ local function get_formspec(data)
 			formspec[#formspec + 1] = "style[install;bgcolor=#28ccdf]"
 			formspec[#formspec + 1] = "button["
 			formspec[#formspec + 1] = left_button_rect
-			formspec[#formspec + 1] = ";install;"
-			formspec[#formspec + 1] = fgettext("Update")
+				formspec[#formspec + 1] = ";install;"
+				formspec[#formspec + 1] = fgettext("Update • $1 Coins", qatan_wallet.price(package))
 			formspec[#formspec + 1] = "]"
 		end
 

@@ -455,16 +455,25 @@ local function handle_submit(this, fields)
 		end
 	end
 
-	if fields.update_all then
-		for i=1, #contentdb.packages_full do
-			local package = contentdb.packages_full[i]
-			if package.path and package.installed_release < package.release and
-					not (package.downloading or package.queued) then
-				contentdb.queue_download(package, contentdb.REASON_UPDATE)
+		if fields.update_all then
+			local denied = false
+			for i=1, #contentdb.packages_full do
+				local package = contentdb.packages_full[i]
+				if package.path and package.installed_release < package.release and
+						not (package.downloading or package.queued) then
+					local ok = qatan_wallet.debit(package)
+					if ok then
+						contentdb.queue_download(package, contentdb.REASON_UPDATE)
+					else
+						denied = true
+					end
+				end
 			end
+			if denied then
+				messagebox("qatan_wallet_update_error", fgettext("Some updates were skipped because there were not enough QatanCraft Coins.")):show()
+			end
+			return true
 		end
-		return true
-	end
 
 	local num_per_page = this.data.num_per_page
 	local start_idx = (cur_page - 1) * num_per_page + 1
