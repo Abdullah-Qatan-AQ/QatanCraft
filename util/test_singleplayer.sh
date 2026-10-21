@@ -4,8 +4,16 @@
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 gameid=${gameid:-devtest}
 executable=$dir/../bin/luanti
-if [ ! -e "$executable" ] && [ -e "$dir/../build/bin/luanti" ]; then
-	executable=$dir/../build/bin/luanti
+if [ ! -e "$executable" ]; then
+	for candidate in "$dir/../build/bin/luanti" "$dir/../build/luanti"; do
+		if [ -x "$candidate" ]; then
+			executable=$candidate
+			break
+		fi
+	done
+	if [ ! -x "$executable" ]; then
+		executable=$(find "$dir/.." -maxdepth 4 -type f -name luanti -perm -111 -print -quit)
+	fi
 fi
 testspath=$dir/../tests
 conf_client=$testspath/client.conf

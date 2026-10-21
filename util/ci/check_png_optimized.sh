@@ -3,7 +3,7 @@
 # Only warn if decrease is more than 3%
 optimization_requirement=3
 
-git ls-files "*.png" | sort -u | (
+git ls-files "*.png" | grep -v '^games/voxelibre/' | sort -u | (
 	optimized=1
 	temp_file=$(mktemp)
 	echo "Optimizing png files:"
