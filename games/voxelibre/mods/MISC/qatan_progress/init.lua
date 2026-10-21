@@ -4,28 +4,49 @@ local sessions = {}
 local MAX_COINS = 1000000
 local MAX_XP = 100000000
 local MAX_LEVEL = 1000
-local WALLET_SALT = 17382941
 
-local function wallet_mac(balance, nonce)
-	return tostring((balance * 1103515245 + nonce * 12345 + WALLET_SALT) % 2147483647)
+local function safe_name(name)
+	return tostring(name):gsub("[^%w_%-]", "_"):sub(1, 48)
 end
 
-local function wallet_read()
-	local balance = tonumber(minetest.settings:get("qatan_wallet_balance")) or 0
-	local nonce = tonumber(minetest.settings:get("qatan_wallet_nonce")) or 0
-	local mac = minetest.settings:get("qatan_wallet_mac") or ""
-	if balance < 0 or balance > MAX_COINS or nonce < 0 or mac ~= wallet_mac(balance, nonce) then
+local function wallet_key(name)
+	local suffix = safe_name(name)
+	local setting = "qatan_wallet_key_" .. suffix
+	local value = minetest.settings:get(setting)
+	if value and #value >= 32 then return value end
+	local seed = table.concat({
+		tostring(os.time()), tostring(minetest.get_us_time and minetest.get_us_time() or 0),
+		tostring(math.random()), suffix,
+	}, "|")
+	value = minetest.sha1(seed)
+	minetest.settings:set(setting, value)
+	if minetest.settings.write then minetest.settings:write() end
+	return value
+end
+
+local function wallet_mac(name, balance, nonce)
+	return minetest.sha1(table.concat({"QatanCraft wallet v2", wallet_key(name), balance, nonce}, "|"))
+end
+
+local function wallet_read(name)
+	local suffix = "_" .. safe_name(name)
+	local balance = tonumber(minetest.settings:get("qatan_wallet_balance" .. suffix)) or 0
+	local nonce = tonumber(minetest.settings:get("qatan_wallet_nonce" .. suffix)) or 0
+	local mac = minetest.settings:get("qatan_wallet_mac" .. suffix) or ""
+	if balance < 0 or balance > MAX_COINS or nonce < 0 or
+			mac ~= wallet_mac(name, math.floor(balance), math.floor(nonce)) then
 		return 0, math.max(0, math.floor(nonce))
 	end
 	return math.floor(balance), math.floor(nonce)
 end
 
-local function wallet_write(balance, nonce)
+local function wallet_write(name, balance, nonce)
 	balance = math.max(0, math.min(MAX_COINS, math.floor(balance)))
 	nonce = math.max(0, math.floor(nonce))
-	minetest.settings:set("qatan_wallet_balance", tostring(balance))
-	minetest.settings:set("qatan_wallet_nonce", tostring(nonce))
-	minetest.settings:set("qatan_wallet_mac", wallet_mac(balance, nonce))
+	local suffix = "_" .. safe_name(name)
+	minetest.settings:set("qatan_wallet_balance" .. suffix, tostring(balance))
+	minetest.settings:set("qatan_wallet_nonce" .. suffix, tostring(nonce))
+	minetest.settings:set("qatan_wallet_mac" .. suffix, wallet_mac(name, balance, nonce))
 	if minetest.settings.write then minetest.settings:write() end
 	return balance
 end
@@ -42,7 +63,8 @@ local function load_data(name)
 	data.xp = math.max(0, math.min(MAX_XP, math.floor(tonumber(data.xp) or 0)))
 	data.level = math.max(1, math.min(MAX_LEVEL, math.floor(tonumber(data.level) or 1)))
 	data.achievements = type(data.achievements) == "table" and data.achievements or {}
-	data.coins = wallet_read()
+	local balance = wallet_read(name)
+	data.coins = balance
 	return data
 end
 
@@ -87,8 +109,8 @@ local function award_progress(player, def)
 	local data, name = data_for(player)
 	if not def or not def.qatan_id or data.achievements[def.qatan_id] then return false end
 	data.achievements[def.qatan_id] = {title = def.title, at = os.time()}
-	local balance, nonce = wallet_read()
-	data.coins = wallet_write(balance + math.max(0, math.floor(def.coins or 0)), nonce + 1)
+	local balance, nonce = wallet_read(name)
+	data.coins = wallet_write(name, balance + math.max(0, math.floor(def.coins or 0)), nonce + 1)
 	data.xp = math.min(MAX_XP, data.xp + math.max(0, math.floor(def.xp or 0)))
 	local old_level = data.level
 	data.level = level_for_xp(data.xp)
@@ -180,9 +202,9 @@ end)
 _G.qatan_progress = {
 	get = function(player) return data_for(player) end,
 	grant = function(player, coins, xp)
-			local data, name = data_for(player)
-			local balance, nonce = wallet_read()
-			data.coins = wallet_write(balance + math.max(0, math.floor(coins or 0)), nonce + 1)
+		local data, name = data_for(player)
+		local balance, nonce = wallet_read(name)
+		data.coins = wallet_write(name, balance + math.max(0, math.floor(coins or 0)), nonce + 1)
 		data.xp = math.min(MAX_XP, data.xp + math.max(0, math.floor(xp or 0)))
 		data.level = level_for_xp(data.xp)
 		save_data(name, data)
