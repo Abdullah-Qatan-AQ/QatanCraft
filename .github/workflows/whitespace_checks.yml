@@ -36,6 +36,7 @@ jobs:
       - name: Check trailing whitespaces
         run: |
           if git ls-files |\
+            grep -v '^games/voxelibre/' |\
             grep -E '\.txt$|\.md$|\.[ch]$|\.cpp$|\.hpp$|\.sh$|\.cmake$|\.glsl$' |\
             xargs grep -n '\s$';\
           then\
@@ -57,10 +58,12 @@ jobs:
       - name: Preprocess files
         run: |
           git ls-files |\
+            grep -v '^games/voxelibre/' |\
             grep -E '^src/.*\.cpp$|^src/.*\.[ch]$' |\
             xargs -L 1 -P $(($(nproc) + 1)) \
               python3 ./util/ci/indent_tab_preprocess.py "/*" "*/"
           git ls-files |\
+            grep -v '^games/voxelibre/' |\
             grep -E '\.lua$' |\
             xargs -L 1 -P $(($(nproc) + 1)) \
               python3 ./util/ci/indent_tab_preprocess.py "--[[" "]]"
@@ -71,6 +74,7 @@ jobs:
       - name: Check indent spaces
         run: |
           if git ls-files |\
+            grep -v '^games/voxelibre/' |\
             grep -E '^src/.*\.cpp$|^src/.*\.[ch]$|\.lua$' |\
             xargs grep -n -P '^\t*[ ]';\
           then\
@@ -79,7 +83,6 @@ jobs:
           else\
             (exit 0);\
           fi
-
   tabs_lua_api_files:
     runs-on: ubuntu-latest
     steps:
@@ -94,4 +97,3 @@ jobs:
           else\
             (exit 0);\
           fi
-

@@ -470,7 +470,8 @@ local function handle_submit(this, fields)
 				end
 			end
 			if denied then
-				messagebox("qatan_wallet_update_error", fgettext("Some updates were skipped because there were not enough QatanCraft Coins.")):show()
+				local message = fgettext("Some updates were skipped because there were not enough QatanCraft Coins.")
+				messagebox("qatan_wallet_update_error", message):show()
 			end
 			return true
 		end
